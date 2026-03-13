@@ -106,9 +106,11 @@ const V2LDProvisionPage = () => {
   const empCompetencies = useMemo(() => selectedEmployeeId ? getEmployeeCompetencies(selectedEmployeeId) : [], [selectedEmployeeId]);
   const gaps = empCompetencies.filter(c => c.gap > 0);
 
+  const gapNames = gaps.map(g => g.name).join(",");
   const gapRecommendations = useMemo(() =>
     gaps.map(g => ({ gap: g, options: getRecommendationsForGap(g.name) })),
-    [gaps.map(g => g.name).join(",")]
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [gapNames]
   );
 
   const selectedItems = Object.entries(gapSelections).map(([competencyName, recId]) => {
