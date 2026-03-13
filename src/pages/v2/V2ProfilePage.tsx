@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Textarea } from "@/components/ui/textarea";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   User, Mail, Phone, MapPin, Building2, Calendar, GraduationCap,
   Award, Upload, FileText, Briefcase, Shield, CheckCircle2,
@@ -26,25 +27,14 @@ const appraisalHistory = [
   { year: "2023", rating: "Meets Expectations", score: 3.4, maxScore: 5, managerComment: "Good first full year. Ahmed showed strong foundation skills and willingness to learn.", strengths: ["Learning Agility", "Teamwork", "Attention to Detail"], improvements: ["Project Planning", "Time Management"] },
 ];
 
-const InfoRow = ({ icon: Icon, label, value }: { icon: React.ElementType; label: string; value: string }) => (
-  <div className="flex items-center gap-3">
-    <Icon className="h-4 w-4 text-muted-foreground shrink-0" />
-    <div>
-      <p className="text-[10px] text-muted-foreground uppercase tracking-wider">{label}</p>
-      <p className="text-sm text-foreground">{value}</p>
-    </div>
-  </div>
-);
-
 const V2ProfilePage = () => {
   const [uploadedFiles, setUploadedFiles] = useState([
     { name: "PRINCE2_Foundation_Certificate.pdf", type: "Certification Proof", date: "2020-09-15" },
     { name: "Lean_Six_Sigma_Green_Belt.pdf", type: "Certification Proof", date: "2021-04-20" },
     { name: "Ahmed_AlThani_CV_2025.pdf", type: "CV / Resume", date: "2025-11-10" },
   ]);
-
   const [aiContext, setAiContext] = useState(
-    "I'm interested in transitioning to a senior project management role with a focus on infrastructure and transport projects. I have experience managing cross-functional teams of 10+ members. I prefer in-person or hybrid training formats over fully online courses. I'm also exploring program management as a long-term career path."
+    "I'm interested in transitioning to a senior project management role with a focus on infrastructure and transport projects. I have experience managing cross-functional teams of 10+ members. I prefer in-person or hybrid training formats over fully online courses."
   );
   const [isEditingContext, setIsEditingContext] = useState(false);
 
@@ -57,283 +47,301 @@ const V2ProfilePage = () => {
     setUploadedFiles(prev => [...newFiles, ...prev]);
   };
 
+  const emp = currentEmployee;
+
   return (
-    <div className="p-8 animate-fade-in max-w-5xl mx-auto">
-      {/* Header */}
-      <div className="flex items-center gap-6 mb-8">
-        <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-lg">
-          <span className="text-3xl font-bold text-primary-foreground">AA</span>
+    <div className="p-6 animate-fade-in max-w-6xl mx-auto">
+      {/* Compact Header */}
+      <div className="flex items-center gap-4 mb-6">
+        <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-lg shadow-primary/20">
+          <span className="text-xl font-bold text-primary-foreground">AA</span>
         </div>
-        <div>
-          <h1 className="text-2xl font-bold text-foreground">{currentEmployee.fullName}</h1>
-          <p className="text-sm text-muted-foreground">{currentEmployee.position.title} · {currentEmployee.position.grade}</p>
-          <p className="text-xs text-muted-foreground mt-1">{currentEmployee.department.name} · {currentEmployee.division.name}</p>
-        </div>
-        <div className="ml-auto">
-          <Badge className="bg-success/15 text-success hover:bg-success/15">Active</Badge>
+        <div className="flex-1">
+          <div className="flex items-center gap-3">
+            <h1 className="text-xl font-bold text-foreground">{emp.fullName}</h1>
+            <Badge className="bg-success/15 text-success hover:bg-success/15 text-[10px]">Active</Badge>
+          </div>
+          <p className="text-xs text-muted-foreground">{emp.position.title} · {emp.position.grade} · {emp.department.name}</p>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Personal Information */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-base">
-              <User className="h-4 w-4 text-primary" /> Personal Information
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-3">
-            <InfoRow icon={User} label="Full Name" value={currentEmployee.fullName} />
-            <InfoRow icon={Calendar} label="Date of Birth" value={currentEmployee.dateOfBirth} />
-            <InfoRow icon={Shield} label="Nationality" value={currentEmployee.nationality} />
-            <InfoRow icon={Mail} label="Email" value={currentEmployee.email} />
-            <InfoRow icon={Phone} label="Phone" value={currentEmployee.phone} />
-            <InfoRow icon={MapPin} label="Location" value={currentEmployee.location} />
-          </CardContent>
-        </Card>
+      {/* Tabbed Content */}
+      <Tabs defaultValue="overview" className="space-y-4">
+        <TabsList className="bg-muted/50 backdrop-blur-sm p-1 rounded-xl">
+          <TabsTrigger value="overview" className="rounded-lg gap-2 text-xs data-[state=active]:bg-card data-[state=active]:shadow-sm">
+            <User className="h-3.5 w-3.5" /> Overview
+          </TabsTrigger>
+          <TabsTrigger value="learning" className="rounded-lg gap-2 text-xs data-[state=active]:bg-card data-[state=active]:shadow-sm">
+            <GraduationCap className="h-3.5 w-3.5" /> Learning
+          </TabsTrigger>
+          <TabsTrigger value="performance" className="rounded-lg gap-2 text-xs data-[state=active]:bg-card data-[state=active]:shadow-sm">
+            <TrendingUp className="h-3.5 w-3.5" /> Performance
+          </TabsTrigger>
+          <TabsTrigger value="documents" className="rounded-lg gap-2 text-xs data-[state=active]:bg-card data-[state=active]:shadow-sm">
+            <FileText className="h-3.5 w-3.5" /> Documents
+          </TabsTrigger>
+          <TabsTrigger value="ai" className="rounded-lg gap-2 text-xs data-[state=active]:bg-card data-[state=active]:shadow-sm">
+            <Brain className="h-3.5 w-3.5" /> AI Context
+          </TabsTrigger>
+        </TabsList>
 
-        {/* Company Information */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-base">
-              <Building2 className="h-4 w-4 text-primary" /> Company Information
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-3">
-            <InfoRow icon={Briefcase} label="Employee ID" value={currentEmployee.employeeNumber} />
-            <InfoRow icon={Briefcase} label="Position" value={`${currentEmployee.position.title} (${currentEmployee.position.code})`} />
-            <InfoRow icon={Building2} label="Department" value={currentEmployee.department.name} />
-            <InfoRow icon={Building2} label="Division" value={currentEmployee.division.name} />
-            <InfoRow icon={User} label="Grade" value={currentEmployee.position.grade} />
-            <InfoRow icon={Calendar} label="Hire Date" value={currentEmployee.hireDate} />
-            <InfoRow icon={User} label="Manager" value={`${currentEmployee.manager} — ${currentEmployee.managerTitle}`} />
-          </CardContent>
-        </Card>
-
-        {/* Education */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-base">
-              <GraduationCap className="h-4 w-4 text-primary" /> Education
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            {currentEmployee.education.map((edu, i) => (
-              <div key={i} className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-0.5">
-                  <GraduationCap className="h-4 w-4 text-primary" />
-                </div>
-                <div>
-                  <p className="text-sm font-medium text-foreground">{edu.degree}</p>
-                  <p className="text-xs text-muted-foreground">{edu.institution} · {edu.year}</p>
-                </div>
-              </div>
-            ))}
-          </CardContent>
-        </Card>
-
-        {/* Certifications Held */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-base">
-              <Award className="h-4 w-4 text-primary" /> Certifications Held
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            {currentEmployee.certifications.map((cert, i) => (
-              <div key={i} className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center shrink-0 mt-0.5">
-                  <Award className="h-4 w-4 text-accent" />
-                </div>
-                <div className="flex-1">
-                  <div className="flex items-center gap-2">
-                    <p className="text-sm font-medium text-foreground">{cert.name}</p>
-                    <Badge className={cn(
-                      "text-[10px]",
-                      cert.status === "Active" ? "bg-success/15 text-success hover:bg-success/15" : "bg-muted text-muted-foreground"
-                    )}>
-                      {cert.status}
-                    </Badge>
+        {/* OVERVIEW TAB */}
+        <TabsContent value="overview" className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {/* Personal */}
+            <Card className="backdrop-blur-sm bg-card/80">
+              <CardHeader className="pb-3 pt-4 px-4">
+                <CardTitle className="text-sm flex items-center gap-2">
+                  <User className="h-3.5 w-3.5 text-primary" /> Personal
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-2.5 px-4 pb-4">
+                {[
+                  { label: "DOB", value: emp.dateOfBirth },
+                  { label: "Nationality", value: emp.nationality },
+                  { label: "Email", value: emp.email },
+                  { label: "Phone", value: emp.phone },
+                  { label: "Location", value: emp.location },
+                ].map(r => (
+                  <div key={r.label}>
+                    <p className="text-[9px] text-muted-foreground uppercase tracking-wider">{r.label}</p>
+                    <p className="text-xs text-foreground">{r.value}</p>
                   </div>
-                  <p className="text-xs text-muted-foreground">{cert.provider} · {cert.year}</p>
-                </div>
-                <CheckCircle2 className="h-4 w-4 text-success shrink-0" />
-              </div>
-            ))}
-          </CardContent>
-        </Card>
+                ))}
+              </CardContent>
+            </Card>
 
-        {/* AI Context — full width */}
-        <Card className="lg:col-span-2 border-primary/20">
-          <CardHeader>
-            <div className="flex items-center justify-between">
-              <CardTitle className="flex items-center gap-2 text-base">
-                <Brain className="h-4 w-4 text-primary" /> Additional AI Context
+            {/* Company */}
+            <Card className="backdrop-blur-sm bg-card/80">
+              <CardHeader className="pb-3 pt-4 px-4">
+                <CardTitle className="text-sm flex items-center gap-2">
+                  <Building2 className="h-3.5 w-3.5 text-primary" /> Company
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-2.5 px-4 pb-4">
+                {[
+                  { label: "Employee ID", value: emp.employeeNumber },
+                  { label: "Position", value: `${emp.position.title} (${emp.position.code})` },
+                  { label: "Department", value: emp.department.name },
+                  { label: "Division", value: emp.division.name },
+                  { label: "Grade", value: emp.position.grade },
+                  { label: "Hire Date", value: emp.hireDate },
+                  { label: "Manager", value: emp.manager },
+                ].map(r => (
+                  <div key={r.label}>
+                    <p className="text-[9px] text-muted-foreground uppercase tracking-wider">{r.label}</p>
+                    <p className="text-xs text-foreground">{r.value}</p>
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
+
+            {/* Education & Certs */}
+            <div className="space-y-4">
+              <Card className="backdrop-blur-sm bg-card/80">
+                <CardHeader className="pb-3 pt-4 px-4">
+                  <CardTitle className="text-sm flex items-center gap-2">
+                    <GraduationCap className="h-3.5 w-3.5 text-primary" /> Education
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-2 px-4 pb-4">
+                  {emp.education.map((edu, i) => (
+                    <div key={i}>
+                      <p className="text-xs font-medium text-foreground">{edu.degree}</p>
+                      <p className="text-[10px] text-muted-foreground">{edu.institution} · {edu.year}</p>
+                    </div>
+                  ))}
+                </CardContent>
+              </Card>
+
+              <Card className="backdrop-blur-sm bg-card/80">
+                <CardHeader className="pb-3 pt-4 px-4">
+                  <CardTitle className="text-sm flex items-center gap-2">
+                    <Award className="h-3.5 w-3.5 text-primary" /> Certifications
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-2 px-4 pb-4">
+                  {emp.certifications.map((cert, i) => (
+                    <div key={i} className="flex items-center justify-between">
+                      <div>
+                        <p className="text-xs font-medium text-foreground">{cert.name}</p>
+                        <p className="text-[10px] text-muted-foreground">{cert.provider} · {cert.year}</p>
+                      </div>
+                      <Badge className={cn(
+                        "text-[9px] h-5",
+                        cert.status === "Active" ? "bg-success/15 text-success hover:bg-success/15" : "bg-muted text-muted-foreground"
+                      )}>{cert.status}</Badge>
+                    </div>
+                  ))}
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </TabsContent>
+
+        {/* LEARNING TAB */}
+        <TabsContent value="learning">
+          <Card className="backdrop-blur-sm bg-card/80">
+            <CardHeader className="pb-3 pt-4 px-5">
+              <CardTitle className="text-sm flex items-center gap-2">
+                <History className="h-3.5 w-3.5 text-primary" /> Learning History
               </CardTitle>
-              <Button
-                variant="outline"
-                size="sm"
-                className="gap-2"
-                onClick={() => setIsEditingContext(!isEditingContext)}
-              >
-                {isEditingContext ? <Save className="h-3.5 w-3.5" /> : <Edit3 className="h-3.5 w-3.5" />}
-                {isEditingContext ? "Save" : "Edit"}
-              </Button>
-            </div>
-            <p className="text-xs text-muted-foreground">
-              Add personal career preferences, aspirations, constraints, or context to help Daleel AI provide better recommendations and matching.
-            </p>
-          </CardHeader>
-          <CardContent>
-            {isEditingContext ? (
-              <Textarea
-                value={aiContext}
-                onChange={(e) => setAiContext(e.target.value)}
-                className="min-h-[120px] text-sm"
-                placeholder="Describe your career goals, preferred learning styles, constraints, or any other context..."
-              />
-            ) : (
-              <p className="text-sm text-muted-foreground leading-relaxed bg-muted/50 rounded-lg p-4">
-                {aiContext || "No additional context provided. Click Edit to add your career preferences and goals."}
-              </p>
-            )}
-          </CardContent>
-        </Card>
-
-        {/* Learning History — full width */}
-        <Card className="lg:col-span-2">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-base">
-              <History className="h-4 w-4 text-primary" /> Learning History
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-2">
-              {learningHistory.map((item, i) => (
-                <div key={i} className="flex items-center gap-3 p-3 rounded-lg border border-border hover:bg-muted/50 transition-colors">
-                  <div className={cn(
-                    "w-8 h-8 rounded-lg flex items-center justify-center shrink-0",
-                    item.type === "Certification" ? "bg-accent/10" : "bg-info/10"
-                  )}>
-                    {item.type === "Certification"
-                      ? <Award className="h-4 w-4 text-accent" />
-                      : <GraduationCap className="h-4 w-4 text-info" />
-                    }
+            </CardHeader>
+            <CardContent className="px-5 pb-4">
+              <div className="space-y-1.5">
+                {learningHistory.map((item, i) => (
+                  <div key={i} className="flex items-center gap-3 p-2.5 rounded-lg hover:bg-muted/40 transition-colors">
+                    <div className={cn(
+                      "w-7 h-7 rounded-lg flex items-center justify-center shrink-0",
+                      item.type === "Certification" ? "bg-accent/10" : "bg-info/10"
+                    )}>
+                      {item.type === "Certification"
+                        ? <Award className="h-3.5 w-3.5 text-accent" />
+                        : <GraduationCap className="h-3.5 w-3.5 text-info" />}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-xs font-medium text-foreground">{item.title}</p>
+                      <p className="text-[10px] text-muted-foreground">{item.provider} · {item.completedDate}</p>
+                    </div>
+                    <Badge className="bg-success/15 text-success hover:bg-success/15 text-[9px] h-5">{item.result}</Badge>
+                    <span className="text-xs font-semibold text-foreground w-10 text-right">{item.score}</span>
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-foreground">{item.title}</p>
-                    <p className="text-[10px] text-muted-foreground">{item.provider} · {item.completedDate}</p>
-                  </div>
-                  <Badge variant="outline" className="text-[10px] shrink-0">{item.type}</Badge>
-                  <Badge className="bg-success/15 text-success hover:bg-success/15 text-[10px] shrink-0">{item.result}</Badge>
-                  {item.score && (
-                    <span className="text-xs font-medium text-foreground shrink-0">{item.score}</span>
-                  )}
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
 
-        {/* Performance Appraisal History — full width */}
-        <Card className="lg:col-span-2">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-base">
-              <TrendingUp className="h-4 w-4 text-primary" /> Performance Appraisal History
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
+        {/* PERFORMANCE TAB */}
+        <TabsContent value="performance">
+          <div className="space-y-4">
             {appraisalHistory.map((a, i) => (
-              <div key={i} className="p-4 rounded-lg border border-border">
-                <div className="flex items-center justify-between mb-3">
-                  <div className="flex items-center gap-3">
-                    <span className="text-sm font-bold text-foreground">{a.year}</span>
-                    <Badge className={cn(
-                      "text-[10px]",
-                      a.rating === "Exceeds Expectations"
-                        ? "bg-success/15 text-success hover:bg-success/15"
-                        : "bg-primary/15 text-primary hover:bg-primary/15"
-                    )}>
-                      {a.rating}
-                    </Badge>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    {Array.from({ length: a.maxScore }).map((_, si) => (
-                      <Star
-                        key={si}
-                        className={cn(
-                          "h-3.5 w-3.5",
-                          si < Math.round(a.score) ? "text-accent fill-accent" : "text-muted-foreground/30"
-                        )}
-                      />
-                    ))}
-                    <span className="text-xs text-muted-foreground ml-1">{a.score}/{a.maxScore}</span>
-                  </div>
-                </div>
-                <p className="text-sm text-muted-foreground mb-3 italic">"{a.managerComment}"</p>
-                <div className="flex gap-6">
-                  <div>
-                    <p className="text-[10px] text-muted-foreground uppercase tracking-wider mb-1">Strengths</p>
-                    <div className="flex flex-wrap gap-1">
-                      {a.strengths.map(s => (
-                        <Badge key={s} variant="outline" className="text-[9px] border-success/30 text-success">{s}</Badge>
+              <Card key={i} className="backdrop-blur-sm bg-card/80">
+                <CardContent className="p-5">
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center gap-3">
+                      <span className="text-sm font-bold text-foreground">{a.year}</span>
+                      <Badge className={cn(
+                        "text-[10px] h-5",
+                        a.rating === "Exceeds Expectations"
+                          ? "bg-success/15 text-success hover:bg-success/15"
+                          : "bg-primary/15 text-primary hover:bg-primary/15"
+                      )}>{a.rating}</Badge>
+                    </div>
+                    <div className="flex items-center gap-0.5">
+                      {Array.from({ length: a.maxScore }).map((_, si) => (
+                        <Star key={si} className={cn(
+                          "h-3 w-3",
+                          si < Math.round(a.score) ? "text-accent fill-accent" : "text-muted-foreground/20"
+                        )} />
                       ))}
+                      <span className="text-[10px] text-muted-foreground ml-1.5">{a.score}/{a.maxScore}</span>
                     </div>
                   </div>
-                  <div>
-                    <p className="text-[10px] text-muted-foreground uppercase tracking-wider mb-1">Areas for Improvement</p>
-                    <div className="flex flex-wrap gap-1">
-                      {a.improvements.map(s => (
-                        <Badge key={s} variant="outline" className="text-[9px] border-warning/30 text-warning">{s}</Badge>
-                      ))}
+                  <p className="text-xs text-muted-foreground mb-3 italic leading-relaxed">"{a.managerComment}"</p>
+                  <div className="flex gap-6">
+                    <div>
+                      <p className="text-[9px] text-muted-foreground uppercase tracking-wider mb-1">Strengths</p>
+                      <div className="flex flex-wrap gap-1">
+                        {a.strengths.map(s => (
+                          <Badge key={s} variant="outline" className="text-[9px] h-5 border-success/30 text-success">{s}</Badge>
+                        ))}
+                      </div>
+                    </div>
+                    <div>
+                      <p className="text-[9px] text-muted-foreground uppercase tracking-wider mb-1">Improve</p>
+                      <div className="flex flex-wrap gap-1">
+                        {a.improvements.map(s => (
+                          <Badge key={s} variant="outline" className="text-[9px] h-5 border-warning/30 text-warning">{s}</Badge>
+                        ))}
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
+                </CardContent>
+              </Card>
             ))}
-          </CardContent>
-        </Card>
+          </div>
+        </TabsContent>
 
-        {/* Document Upload — full width */}
-        <Card className="lg:col-span-2">
-          <CardHeader>
-            <div className="flex items-center justify-between">
-              <CardTitle className="flex items-center gap-2 text-base">
-                <Upload className="h-4 w-4 text-primary" /> Documents & Proof
-              </CardTitle>
-              <label className="cursor-pointer">
-                <input type="file" multiple accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" className="hidden" onChange={handleFileUpload} />
-                <Button variant="outline" size="sm" asChild>
-                  <span className="gap-2"><Upload className="h-3.5 w-3.5" /> Upload File</span>
-                </Button>
-              </label>
-            </div>
-            <p className="text-xs text-muted-foreground">
-              Upload your CV, certification proofs, or training completion certificates. These help Daleel AI provide better recommendations.
-            </p>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-2">
-              {uploadedFiles.map((file, i) => (
-                <div key={i} className="flex items-center gap-3 p-3 rounded-lg border border-border hover:bg-muted/50 transition-colors">
-                  <FileText className="h-5 w-5 text-muted-foreground shrink-0" />
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm text-foreground truncate">{file.name}</p>
-                    <p className="text-[10px] text-muted-foreground">{file.type} · Uploaded {file.date}</p>
-                  </div>
-                  <Badge variant="outline" className="text-[10px]">{file.type}</Badge>
-                </div>
-              ))}
-            </div>
-            {uploadedFiles.length === 0 && (
-              <div className="text-center py-8 text-muted-foreground">
-                <Upload className="h-8 w-8 mx-auto mb-2 opacity-40" />
-                <p className="text-sm">No documents uploaded yet</p>
+        {/* DOCUMENTS TAB */}
+        <TabsContent value="documents">
+          <Card className="backdrop-blur-sm bg-card/80">
+            <CardHeader className="pb-3 pt-4 px-5">
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-sm flex items-center gap-2">
+                  <Upload className="h-3.5 w-3.5 text-primary" /> Documents & Proof
+                </CardTitle>
+                <label className="cursor-pointer">
+                  <input type="file" multiple accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" className="hidden" onChange={handleFileUpload} />
+                  <Button variant="outline" size="sm" className="h-7 text-xs gap-1.5" asChild>
+                    <span><Upload className="h-3 w-3" /> Upload</span>
+                  </Button>
+                </label>
               </div>
-            )}
-          </CardContent>
-        </Card>
-      </div>
+              <p className="text-[10px] text-muted-foreground">Upload CV, certification proofs, or training certificates to enrich Daleel AI context.</p>
+            </CardHeader>
+            <CardContent className="px-5 pb-4">
+              <div className="space-y-1.5">
+                {uploadedFiles.map((file, i) => (
+                  <div key={i} className="flex items-center gap-3 p-2.5 rounded-lg hover:bg-muted/40 transition-colors">
+                    <FileText className="h-4 w-4 text-muted-foreground shrink-0" />
+                    <div className="flex-1 min-w-0">
+                      <p className="text-xs text-foreground truncate">{file.name}</p>
+                      <p className="text-[10px] text-muted-foreground">{file.type} · {file.date}</p>
+                    </div>
+                    <Badge variant="outline" className="text-[9px] h-5">{file.type}</Badge>
+                  </div>
+                ))}
+              </div>
+              {uploadedFiles.length === 0 && (
+                <div className="text-center py-6 text-muted-foreground">
+                  <Upload className="h-6 w-6 mx-auto mb-1.5 opacity-40" />
+                  <p className="text-xs">No documents uploaded yet</p>
+                </div>
+              )}
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        {/* AI CONTEXT TAB */}
+        <TabsContent value="ai">
+          <Card className="backdrop-blur-sm bg-card/80 border-primary/20">
+            <CardHeader className="pb-3 pt-4 px-5">
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-sm flex items-center gap-2">
+                  <Brain className="h-3.5 w-3.5 text-primary" /> Additional AI Context
+                </CardTitle>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="h-7 text-xs gap-1.5"
+                  onClick={() => setIsEditingContext(!isEditingContext)}
+                >
+                  {isEditingContext ? <Save className="h-3 w-3" /> : <Edit3 className="h-3 w-3" />}
+                  {isEditingContext ? "Save" : "Edit"}
+                </Button>
+              </div>
+              <p className="text-[10px] text-muted-foreground">
+                Share career preferences, aspirations, or constraints to help Daleel AI give you better recommendations.
+              </p>
+            </CardHeader>
+            <CardContent className="px-5 pb-4">
+              {isEditingContext ? (
+                <Textarea
+                  value={aiContext}
+                  onChange={(e) => setAiContext(e.target.value)}
+                  className="min-h-[140px] text-xs"
+                  placeholder="Describe your career goals, preferred learning styles, constraints..."
+                />
+              ) : (
+                <div className="text-xs text-muted-foreground leading-relaxed bg-muted/30 rounded-lg p-4">
+                  {aiContext || "No additional context provided. Click Edit to add your career preferences."}
+                </div>
+              )}
+            </CardContent>
+          </Card>
+        </TabsContent>
+      </Tabs>
     </div>
   );
 };
