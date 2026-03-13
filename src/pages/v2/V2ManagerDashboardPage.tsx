@@ -28,6 +28,7 @@ const aiRecommendations = [
 
 const V2ManagerDashboardPage = () => {
   const [activeTab, setActiveTab] = useState("team");
+  const navigate = useNavigate();
 
   const statusColor = (status: string) => {
     switch (status) {
