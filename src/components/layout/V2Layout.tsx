@@ -200,7 +200,10 @@ const V2Layout = () => {
                         <button className="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-sm text-foreground hover:bg-muted/50 transition-colors">
                           <Settings className="h-4 w-4 text-muted-foreground" /> Settings
                         </button>
-                        <button className="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-sm text-destructive hover:bg-destructive/10 transition-colors">
+                        <button
+                          onClick={() => { navigate("/v2/login"); setProfileOpen(false); }}
+                          className="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-sm text-destructive hover:bg-destructive/10 transition-colors"
+                        >
                           <LogOut className="h-4 w-4" /> Sign out
                         </button>
                       </div>
