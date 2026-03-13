@@ -14,12 +14,11 @@ const kpis = {
   qatarization: { current: 42, target: 60, trend: +3.2 },
   workforceReadiness: { current: 64, target: 80, trend: +5.1 },
   successionCoverage: { current: 58, target: 75, trend: +2.8 },
-  talentRetention: { current: 91, target: 95, trend: -0.4 },
+  trainingCompletion: { current: 76, target: 90, trend: +4.2 },
   budgetROI: { multiplier: 2.3, trend: +0.2 },
   activeCDPs: 312,
-  totalWorkforce: 847,
-  criticalRoles: 34,
-  criticalRolesFilled: 21,
+  enrolledLearners: 534,
+  competencyMilestones: 187,
 };
 
 const qatarBreakdown = [
