@@ -3,9 +3,9 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
-  TrendingUp, Users, Target, Globe, Landmark, ShieldCheck,
-  ArrowUpRight, ArrowDownRight, BarChart3, Briefcase, Star,
-  Zap, Award, BookOpen, Brain, Building2
+  Target, Globe, Landmark,
+  ArrowUpRight, ArrowDownRight, Briefcase, Star,
+  Zap, Award, BookOpen, Brain
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -14,12 +14,11 @@ const kpis = {
   qatarization: { current: 42, target: 60, trend: +3.2 },
   workforceReadiness: { current: 64, target: 80, trend: +5.1 },
   successionCoverage: { current: 58, target: 75, trend: +2.8 },
-  talentRetention: { current: 91, target: 95, trend: -0.4 },
+  trainingCompletion: { current: 76, target: 90, trend: +4.2 },
   budgetROI: { multiplier: 2.3, trend: +0.2 },
   activeCDPs: 312,
-  totalWorkforce: 847,
-  criticalRoles: 34,
-  criticalRolesFilled: 21,
+  enrolledLearners: 534,
+  competencyMilestones: 187,
 };
 
 const qatarBreakdown = [
@@ -32,11 +31,11 @@ const qatarBreakdown = [
 ];
 
 const successionPipeline = [
-  { role: "Head of Projects", grade: "G10", candidates: 3, readiness: 78, urgency: "Medium" },
-  { role: "Director of Operations", grade: "G11", candidates: 1, readiness: 45, urgency: "Critical" },
-  { role: "CFO", grade: "G12", candidates: 2, readiness: 62, urgency: "High" },
-  { role: "CIO", grade: "G11", candidates: 2, readiness: 71, urgency: "Medium" },
-  { role: "Head of HR", grade: "G10", candidates: 4, readiness: 85, urgency: "Low" },
+  { role: "Head of Projects", grade: "G10", devPrograms: 3, trainingComplete: 78, urgency: "Medium" },
+  { role: "Director of Operations", grade: "G11", devPrograms: 1, trainingComplete: 45, urgency: "Critical" },
+  { role: "CFO", grade: "G12", devPrograms: 2, trainingComplete: 62, urgency: "High" },
+  { role: "CIO", grade: "G11", devPrograms: 2, trainingComplete: 71, urgency: "Medium" },
+  { role: "Head of HR", grade: "G10", devPrograms: 4, trainingComplete: 85, urgency: "Low" },
 ];
 
 const strategicInitiatives = [
@@ -80,7 +79,7 @@ const V2StrategicDashboardPage = () => {
           { icon: Globe, label: "Qatarization", value: `${kpis.qatarization.current}%`, target: `Target ${kpis.qatarization.target}%`, trend: kpis.qatarization.trend, color: "text-primary" },
           { icon: Target, label: "Workforce Readiness", value: `${kpis.workforceReadiness.current}%`, target: `Target ${kpis.workforceReadiness.target}%`, trend: kpis.workforceReadiness.trend, color: "text-info" },
           { icon: Briefcase, label: "Succession Coverage", value: `${kpis.successionCoverage.current}%`, target: `Target ${kpis.successionCoverage.target}%`, trend: kpis.successionCoverage.trend, color: "text-accent" },
-          { icon: Users, label: "Talent Retention", value: `${kpis.talentRetention.current}%`, target: `Target ${kpis.talentRetention.target}%`, trend: kpis.talentRetention.trend, color: "text-success" },
+          { icon: BookOpen, label: "Training Completion", value: `${kpis.trainingCompletion.current}%`, target: `Target ${kpis.trainingCompletion.target}%`, trend: kpis.trainingCompletion.trend, color: "text-success" },
           { icon: Zap, label: "L&D ROI", value: `${kpis.budgetROI.multiplier}x`, target: "Return on investment", trend: kpis.budgetROI.trend, color: "text-warning" },
         ].map(stat => (
           <Card key={stat.label} className="backdrop-blur-sm bg-card/80">
@@ -101,22 +100,22 @@ const V2StrategicDashboardPage = () => {
         <Card className="backdrop-blur-sm bg-card/80 border-primary/15">
           <CardContent className="p-4 flex items-center gap-4">
             <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
-              <Users className="h-6 w-6 text-primary" />
+              <BookOpen className="h-6 w-6 text-primary" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-foreground">{kpis.totalWorkforce}</p>
-              <p className="text-[10px] text-muted-foreground">Total Workforce · {kpis.activeCDPs} Active CDPs</p>
+              <p className="text-2xl font-bold text-foreground">{kpis.enrolledLearners}</p>
+              <p className="text-[10px] text-muted-foreground">Active Learners · {kpis.activeCDPs} CDPs in progress</p>
             </div>
           </CardContent>
         </Card>
         <Card className="backdrop-blur-sm bg-card/80 border-accent/15">
           <CardContent className="p-4 flex items-center gap-4">
             <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center shrink-0">
-              <ShieldCheck className="h-6 w-6 text-accent" />
+              <Star className="h-6 w-6 text-accent" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-foreground">{kpis.criticalRolesFilled}/{kpis.criticalRoles}</p>
-              <p className="text-[10px] text-muted-foreground">Critical Roles Filled · {Math.round(kpis.criticalRolesFilled / kpis.criticalRoles * 100)}% coverage</p>
+              <p className="text-2xl font-bold text-foreground">{kpis.competencyMilestones}</p>
+              <p className="text-[10px] text-muted-foreground">Competency Milestones · achieved this quarter</p>
             </div>
           </CardContent>
         </Card>
@@ -209,7 +208,7 @@ const V2StrategicDashboardPage = () => {
                 <div className="flex items-center justify-between mb-3">
                   <div>
                     <p className="text-sm font-semibold text-foreground">{role.role}</p>
-                    <p className="text-[10px] text-muted-foreground">{role.grade} · {role.candidates} successor candidate{role.candidates !== 1 ? "s" : ""}</p>
+                    <p className="text-[10px] text-muted-foreground">{role.grade} · {role.devPrograms} development program{role.devPrograms !== 1 ? "s" : ""} active</p>
                   </div>
                   <Badge className={cn(
                     "text-[10px] h-5",
@@ -222,17 +221,10 @@ const V2StrategicDashboardPage = () => {
                 <div className="flex items-center gap-3">
                   <div className="flex-1">
                     <div className="flex items-center justify-between mb-1">
-                      <span className="text-[9px] text-muted-foreground uppercase tracking-wider">Pipeline Readiness</span>
-                      <span className="text-[10px] font-medium text-foreground">{role.readiness}%</span>
+                      <span className="text-[9px] text-muted-foreground uppercase tracking-wider">Development Readiness</span>
+                      <span className="text-[10px] font-medium text-foreground">{role.trainingComplete}%</span>
                     </div>
-                    <Progress value={role.readiness} className="h-1.5" />
-                  </div>
-                  <div className="flex -space-x-1.5">
-                    {Array.from({ length: Math.min(role.candidates, 4) }).map((_, i) => (
-                      <div key={i} className="w-6 h-6 rounded-full bg-muted border-2 border-card flex items-center justify-center">
-                        <span className="text-[8px] font-medium text-muted-foreground">{String.fromCharCode(65 + i)}</span>
-                      </div>
-                    ))}
+                    <Progress value={role.trainingComplete} className="h-1.5" />
                   </div>
                 </div>
               </CardContent>
