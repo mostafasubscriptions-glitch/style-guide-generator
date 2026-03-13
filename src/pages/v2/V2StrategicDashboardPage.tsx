@@ -208,7 +208,7 @@ const V2StrategicDashboardPage = () => {
                 <div className="flex items-center justify-between mb-3">
                   <div>
                     <p className="text-sm font-semibold text-foreground">{role.role}</p>
-                    <p className="text-[10px] text-muted-foreground">{role.grade} · {role.candidates} successor candidate{role.candidates !== 1 ? "s" : ""}</p>
+                    <p className="text-[10px] text-muted-foreground">{role.grade} · {role.devPrograms} development program{role.devPrograms !== 1 ? "s" : ""} active</p>
                   </div>
                   <Badge className={cn(
                     "text-[10px] h-5",
@@ -221,17 +221,10 @@ const V2StrategicDashboardPage = () => {
                 <div className="flex items-center gap-3">
                   <div className="flex-1">
                     <div className="flex items-center justify-between mb-1">
-                      <span className="text-[9px] text-muted-foreground uppercase tracking-wider">Pipeline Readiness</span>
-                      <span className="text-[10px] font-medium text-foreground">{role.readiness}%</span>
+                      <span className="text-[9px] text-muted-foreground uppercase tracking-wider">Development Readiness</span>
+                      <span className="text-[10px] font-medium text-foreground">{role.trainingComplete}%</span>
                     </div>
-                    <Progress value={role.readiness} className="h-1.5" />
-                  </div>
-                  <div className="flex -space-x-1.5">
-                    {Array.from({ length: Math.min(role.candidates, 4) }).map((_, i) => (
-                      <div key={i} className="w-6 h-6 rounded-full bg-muted border-2 border-card flex items-center justify-center">
-                        <span className="text-[8px] font-medium text-muted-foreground">{String.fromCharCode(65 + i)}</span>
-                      </div>
-                    ))}
+                    <Progress value={role.trainingComplete} className="h-1.5" />
                   </div>
                 </div>
               </CardContent>
