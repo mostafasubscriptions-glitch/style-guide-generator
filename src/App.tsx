@@ -18,6 +18,7 @@ import TrainingPage from "./pages/admin/TrainingPage";
 import V2HomePage from "./pages/v2/V2HomePage";
 import V2DashboardPage from "./pages/v2/V2DashboardPage";
 import V2ProfilePage from "./pages/v2/V2ProfilePage";
+import V2CatalogueDetailPage from "./pages/v2/V2CatalogueDetailPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -45,6 +46,7 @@ const App = () => (
             <Route path="/v2/dashboard" element={<V2DashboardPage />} />
             <Route path="/v2/wizard" element={<WizardPage />} />
             <Route path="/v2/catalogue" element={<CataloguePage />} />
+            <Route path="/v2/catalogue/:type/:id" element={<V2CatalogueDetailPage />} />
             <Route path="/v2/faq" element={<FAQPage />} />
             <Route path="/v2/profile" element={<V2ProfilePage />} />
           </Route>

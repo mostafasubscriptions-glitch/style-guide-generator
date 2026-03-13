@@ -1,10 +1,11 @@
 import { useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import {
-  Search, Award, BookOpen, Star, ChevronDown, ChevronUp, ExternalLink
+  Search, Award, BookOpen, Star, ChevronDown, ChevronUp, ExternalLink, ArrowRight
 } from "lucide-react";
 import { certifications, trainings, providers } from "@/data/mockData";
 import { cn } from "@/lib/utils";
@@ -29,6 +30,9 @@ type CatalogueItem = {
 };
 
 const CataloguePage = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const isV2 = location.pathname.startsWith("/v2");
   const [search, setSearch] = useState("");
   const [typeFilter, setTypeFilter] = useState<"All" | "Certification" | "Course">("All");
   const [providerFilter, setProviderFilter] = useState<string>("All");
@@ -174,6 +178,14 @@ const CataloguePage = () => {
                       {isExpanded ? "Less" : "Details"}
                       {isExpanded ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />}
                     </button>
+                    {isV2 && (
+                      <button
+                        onClick={() => navigate(`/v2/catalogue/${item.type === "Certification" ? "cert" : "course"}/${item.type === "Certification" ? item.id : item.id - 100}`)}
+                        className="text-xs text-primary flex items-center gap-1 hover:underline"
+                      >
+                        Full Page <ArrowRight className="h-3 w-3" />
+                      </button>
+                    )}
                   </div>
                 </div>
 
