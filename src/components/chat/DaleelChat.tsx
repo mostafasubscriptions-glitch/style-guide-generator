@@ -56,7 +56,7 @@ const DaleelChat = ({ open, onClose }: Props) => {
   if (!open) return null;
 
   return (
-    <div className="w-[360px] h-full border-l border-border bg-card flex flex-col animate-slide-in-right">
+    <div className="fixed right-4 top-20 bottom-4 w-[360px] z-50 bg-card border border-border rounded-2xl shadow-2xl shadow-black/15 flex flex-col animate-slide-in-right overflow-hidden">
       {/* Header */}
       <div className="flex items-center justify-between px-4 h-14 border-b border-border shrink-0">
         <div className="flex items-center gap-2">

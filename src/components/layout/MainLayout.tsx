@@ -21,12 +21,10 @@ const MainLayout = () => {
       >
         <TopBar onToggleChat={() => setChatOpen(!chatOpen)} chatOpen={chatOpen} />
         
-        <div className="flex flex-1 overflow-hidden">
-          <main className="flex-1 overflow-y-auto">
-            <Outlet />
-          </main>
-          <DaleelChat open={chatOpen} onClose={() => setChatOpen(false)} />
-        </div>
+        <main className="flex-1 overflow-y-auto">
+          <Outlet />
+        </main>
+        <DaleelChat open={chatOpen} onClose={() => setChatOpen(false)} />
       </div>
     </div>
   );

@@ -191,7 +191,10 @@ const V2Layout = () => {
                         </div>
                       </div>
                       <div className="pt-2 space-y-1">
-                        <button className="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-sm text-foreground hover:bg-muted/50 transition-colors">
+                        <button
+                          onClick={() => { navigate("/v2/profile"); setProfileOpen(false); }}
+                          className="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-sm text-foreground hover:bg-muted/50 transition-colors"
+                        >
                           <User className="h-4 w-4 text-muted-foreground" /> Profile
                         </button>
                         <button className="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-sm text-foreground hover:bg-muted/50 transition-colors">
@@ -210,12 +213,10 @@ const V2Layout = () => {
         </div>
       </header>
 
-      {/* Content */}
-      <div className="relative z-10 flex">
-        <main className={cn("flex-1 transition-all duration-300", chatOpen ? "mr-[380px]" : "")}>
-          <div className="max-w-[1440px] mx-auto">
-            <Outlet />
-          </div>
+      {/* Content — chat no longer affects layout */}
+      <div className="relative z-10">
+        <main className="max-w-[1440px] mx-auto">
+          <Outlet />
         </main>
         <DaleelChat open={chatOpen} onClose={() => setChatOpen(false)} />
       </div>
