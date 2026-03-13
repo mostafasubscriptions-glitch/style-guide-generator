@@ -30,6 +30,9 @@ type CatalogueItem = {
 };
 
 const CataloguePage = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const isV2 = location.pathname.startsWith("/v2");
   const [search, setSearch] = useState("");
   const [typeFilter, setTypeFilter] = useState<"All" | "Certification" | "Course">("All");
   const [providerFilter, setProviderFilter] = useState<string>("All");
