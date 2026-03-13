@@ -11,6 +11,9 @@ import CataloguePage from "./pages/CataloguePage";
 import FAQPage from "./pages/FAQPage";
 import ManagerPage from "./pages/ManagerPage";
 import StyleGuidePage from "./pages/StyleGuidePage";
+import PositionsPage from "./pages/admin/PositionsPage";
+import CertificationsPage from "./pages/admin/CertificationsPage";
+import TrainingPage from "./pages/admin/TrainingPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
