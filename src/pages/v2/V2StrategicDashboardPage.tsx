@@ -31,11 +31,11 @@ const qatarBreakdown = [
 ];
 
 const successionPipeline = [
-  { role: "Head of Projects", grade: "G10", candidates: 3, readiness: 78, urgency: "Medium" },
-  { role: "Director of Operations", grade: "G11", candidates: 1, readiness: 45, urgency: "Critical" },
-  { role: "CFO", grade: "G12", candidates: 2, readiness: 62, urgency: "High" },
-  { role: "CIO", grade: "G11", candidates: 2, readiness: 71, urgency: "Medium" },
-  { role: "Head of HR", grade: "G10", candidates: 4, readiness: 85, urgency: "Low" },
+  { role: "Head of Projects", grade: "G10", devPrograms: 3, trainingComplete: 78, urgency: "Medium" },
+  { role: "Director of Operations", grade: "G11", devPrograms: 1, trainingComplete: 45, urgency: "Critical" },
+  { role: "CFO", grade: "G12", devPrograms: 2, trainingComplete: 62, urgency: "High" },
+  { role: "CIO", grade: "G11", devPrograms: 2, trainingComplete: 71, urgency: "Medium" },
+  { role: "Head of HR", grade: "G10", devPrograms: 4, trainingComplete: 85, urgency: "Low" },
 ];
 
 const strategicInitiatives = [
