@@ -59,6 +59,7 @@ const App = () => (
               <Route path="/v2/profile" element={<V2ProfilePage />} />
               <Route path="/v2/manager" element={<V2ManagerDashboardPage />} />
               <Route path="/v2/ld" element={<V2LDDashboardPage />} />
+              <Route path="/v2/ld/provision" element={<V2LDProvisionPage />} />
               <Route path="/v2/strategic" element={<V2StrategicDashboardPage />} />
             </Route>
             <Route path="/style-guide" element={<StyleGuidePage />} />
