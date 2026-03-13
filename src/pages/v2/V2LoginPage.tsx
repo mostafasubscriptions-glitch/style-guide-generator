@@ -4,24 +4,25 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
-import { Shield, User, Users, Settings, ChevronRight } from "lucide-react";
+import { Shield, User, Users, BookOpen, ChevronRight, BarChart3 } from "lucide-react";
+import { useRole, UserRole } from "@/contexts/RoleContext";
 
-type Role = "employee" | "manager" | "admin";
-
-const roles: { value: Role; label: string; description: string; icon: React.ElementType; color: string }[] = [
+const roles: { value: UserRole; label: string; description: string; icon: React.ElementType; color: string }[] = [
   { value: "employee", label: "Employee", description: "Access your CDP, learning catalogue, and Daleel AI", icon: User, color: "from-primary to-primary-dark" },
-  { value: "manager", label: "Manager", description: "Review team CDPs, approve plans, and track progress", icon: Users, color: "from-accent to-accent/80" },
-  { value: "admin", label: "Administrator", description: "Manage positions, certifications, training catalogue", icon: Settings, color: "from-info to-info/80" },
+  { value: "manager", label: "Direct Manager", description: "Review team CDPs, approve training, and track progress", icon: Users, color: "from-accent to-accent/80" },
+  { value: "ld", label: "L&D Management", description: "Org-wide analytics, compliance, training programs", icon: BookOpen, color: "from-info to-info/80" },
+  { value: "strategic_leader", label: "Strategic Leader", description: "Workforce planning, KPIs, and strategic alignment", icon: BarChart3, color: "from-warning to-warning/80" },
 ];
 
 const V2LoginPage = () => {
   const navigate = useNavigate();
-  const [selectedRole, setSelectedRole] = useState<Role>("employee");
+  const { setRole } = useRole();
+  const [selectedRole, setSelectedRole] = useState<UserRole>("employee");
   const [isSigningIn, setIsSigningIn] = useState(false);
 
   const handleMicrosoftLogin = () => {
     setIsSigningIn(true);
-    // Mock login — simulate delay then navigate
+    setRole(selectedRole);
     setTimeout(() => {
       navigate("/v2");
     }, 1200);
@@ -42,7 +43,6 @@ const V2LoginPage = () => {
         transition={{ duration: 0.5 }}
         className="relative z-10 w-full max-w-md mx-4"
       >
-        {/* Card */}
         <div className="backdrop-blur-xl bg-card/80 border border-border/50 rounded-3xl shadow-2xl shadow-black/10 p-8">
           {/* Logo */}
           <div className="flex flex-col items-center mb-8">
@@ -135,7 +135,6 @@ const V2LoginPage = () => {
           </div>
         </div>
 
-        {/* Footer */}
         <p className="text-center text-[10px] text-muted-foreground mt-4">
           © 2026 Mowasalat · Qatar's Integrated Transport Company
         </p>

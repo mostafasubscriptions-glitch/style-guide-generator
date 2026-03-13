@@ -5,30 +5,53 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   Home, LayoutDashboard, Compass, BookOpen, HelpCircle,
   Users, Award, GraduationCap, MessageSquare, Bell, Search,
-  ChevronDown, User, Settings, LogOut
+  ChevronDown, User, Settings, LogOut, BarChart3, Shield
 } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 import DaleelChat from "@/components/chat/DaleelChat";
+import { useRole, UserRole } from "@/contexts/RoleContext";
 
-const navItems = [
-  { label: "Home", path: "/v2", icon: Home },
-  { label: "Dashboard", path: "/v2/dashboard", icon: LayoutDashboard },
-  { label: "CDP Wizard", path: "/v2/wizard", icon: Compass },
-  { label: "Catalogue", path: "/v2/catalogue", icon: BookOpen },
-  { label: "FAQ", path: "/v2/faq", icon: HelpCircle },
-];
+const roleColors: Record<UserRole, string> = {
+  employee: "bg-primary/15 text-primary",
+  manager: "bg-accent/15 text-accent",
+  ld: "bg-info/15 text-info",
+  strategic_leader: "bg-warning/15 text-warning",
+};
 
-const adminItems = [
-  { label: "Positions", path: "/admin/positions", icon: Users },
-  { label: "Certifications", path: "/admin/certifications", icon: Award },
-  { label: "Training", path: "/admin/training", icon: GraduationCap },
-];
+const roleLabels: Record<UserRole, string> = {
+  employee: "Employee",
+  manager: "Direct Manager",
+  ld: "L&D Management",
+  strategic_leader: "Strategic Leader",
+};
 
 const V2Layout = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { role, setRole, roleName } = useRole();
   const [chatOpen, setChatOpen] = useState(false);
   const [adminOpen, setAdminOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
+  const [roleMenuOpen, setRoleMenuOpen] = useState(false);
+
+  // Base nav items for all roles
+  const navItems = [
+    { label: "Home", path: "/v2", icon: Home, roles: ["employee", "manager", "ld", "strategic_leader"] },
+    { label: "Dashboard", path: "/v2/dashboard", icon: LayoutDashboard, roles: ["employee"] },
+    { label: "CDP Wizard", path: "/v2/wizard", icon: Compass, roles: ["employee"] },
+    { label: "Catalogue", path: "/v2/catalogue", icon: BookOpen, roles: ["employee", "manager", "ld"] },
+    { label: "FAQ", path: "/v2/faq", icon: HelpCircle, roles: ["employee", "manager", "ld", "strategic_leader"] },
+    { label: "My Team", path: "/v2/manager", icon: Users, roles: ["manager"] },
+    { label: "L&D Dashboard", path: "/v2/ld", icon: BarChart3, roles: ["ld"] },
+  ];
+
+  const adminItems = [
+    { label: "Positions", path: "/admin/positions", icon: Users },
+    { label: "Certifications", path: "/admin/certifications", icon: Award },
+    { label: "Training", path: "/admin/training", icon: GraduationCap },
+  ];
+
+  const filteredNav = navItems.filter(item => item.roles.includes(role));
 
   return (
     <div className="min-h-screen bg-v2-bg">
@@ -44,10 +67,7 @@ const V2Layout = () => {
         <div className="max-w-[1440px] mx-auto px-6">
           <div className="flex items-center h-16 gap-8">
             {/* Logo */}
-            <div
-              className="flex items-center gap-3 cursor-pointer shrink-0"
-              onClick={() => navigate("/v2")}
-            >
+            <div className="flex items-center gap-3 cursor-pointer shrink-0" onClick={() => navigate("/v2")}>
               <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center shadow-lg shadow-primary/25">
                 <span className="text-primary-foreground font-bold text-sm">M</span>
               </div>
@@ -59,7 +79,7 @@ const V2Layout = () => {
 
             {/* Nav Links */}
             <nav className="flex items-center gap-1 flex-1">
-              {navItems.map((item) => {
+              {filteredNav.map((item) => {
                 const isActive =
                   location.pathname === item.path ||
                   (item.path !== "/v2" && location.pathname.startsWith(item.path));
@@ -87,51 +107,85 @@ const V2Layout = () => {
                 );
               })}
 
-              {/* Admin Dropdown */}
+              {/* Admin Dropdown — only for ld role */}
+              {(role === "ld" || role === "strategic_leader") && (
+                <div className="relative">
+                  <button
+                    onClick={() => setAdminOpen(!adminOpen)}
+                    className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all"
+                  >
+                    <Settings className="h-4 w-4" />
+                    Admin
+                    <ChevronDown className={cn("h-3 w-3 transition-transform", adminOpen && "rotate-180")} />
+                  </button>
+                  <AnimatePresence>
+                    {adminOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 8, scale: 0.96 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 8, scale: 0.96 }}
+                        transition={{ duration: 0.15 }}
+                        className="absolute top-full mt-2 left-0 w-56 backdrop-blur-xl bg-card/90 border border-border/50 rounded-2xl shadow-xl shadow-black/10 p-2 z-50"
+                      >
+                        {adminItems.map((item) => (
+                          <button
+                            key={item.path}
+                            onClick={() => { navigate(item.path); setAdminOpen(false); }}
+                            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-foreground hover:bg-muted/50 transition-colors"
+                          >
+                            <item.icon className="h-4 w-4 text-muted-foreground" />
+                            {item.label}
+                          </button>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              )}
+            </nav>
+
+            {/* Right Side */}
+            <div className="flex items-center gap-2">
+              {/* Role Switcher */}
               <div className="relative">
                 <button
-                  onClick={() => setAdminOpen(!adminOpen)}
-                  className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all"
+                  onClick={() => setRoleMenuOpen(!roleMenuOpen)}
+                  className="flex items-center gap-1.5 h-8 px-3 rounded-lg transition-colors hover:bg-muted/50"
                 >
-                  <Settings className="h-4 w-4" />
-                  Admin
-                  <ChevronDown className={cn("h-3 w-3 transition-transform", adminOpen && "rotate-180")} />
+                  <Badge className={cn("text-[9px] h-5 gap-1", roleColors[role])}>
+                    <Shield className="h-2.5 w-2.5" />
+                    {roleName}
+                  </Badge>
+                  <ChevronDown className={cn("h-3 w-3 text-muted-foreground transition-transform", roleMenuOpen && "rotate-180")} />
                 </button>
                 <AnimatePresence>
-                  {adminOpen && (
+                  {roleMenuOpen && (
                     <motion.div
                       initial={{ opacity: 0, y: 8, scale: 0.96 }}
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 8, scale: 0.96 }}
                       transition={{ duration: 0.15 }}
-                      className="absolute top-full mt-2 left-0 w-56 backdrop-blur-xl bg-card/90 border border-border/50 rounded-2xl shadow-xl shadow-black/10 p-2 z-50"
+                      className="absolute top-full mt-2 right-0 w-52 backdrop-blur-xl bg-card/90 border border-border/50 rounded-2xl shadow-xl shadow-black/10 p-2 z-50"
                     >
-                      {adminItems.map((item) => (
+                      <p className="text-[9px] text-muted-foreground uppercase tracking-wider px-3 py-1.5">Switch Role</p>
+                      {(Object.keys(roleLabels) as UserRole[]).map((r) => (
                         <button
-                          key={item.path}
-                          onClick={() => { navigate(item.path); setAdminOpen(false); }}
-                          className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-foreground hover:bg-muted/50 transition-colors"
+                          key={r}
+                          onClick={() => { setRole(r); setRoleMenuOpen(false); navigate("/v2"); }}
+                          className={cn(
+                            "w-full flex items-center gap-2 px-3 py-2 rounded-xl text-xs transition-colors",
+                            role === r ? "bg-primary/10 text-primary font-medium" : "text-foreground hover:bg-muted/50"
+                          )}
                         >
-                          <item.icon className="h-4 w-4 text-muted-foreground" />
-                          {item.label}
+                          <div className={cn("w-2 h-2 rounded-full", role === r ? "bg-primary" : "bg-muted-foreground/30")} />
+                          {roleLabels[r]}
                         </button>
                       ))}
-                      <div className="border-t border-border/50 my-1" />
-                      <button
-                        onClick={() => { navigate("/manager"); setAdminOpen(false); }}
-                        className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-foreground hover:bg-muted/50 transition-colors"
-                      >
-                        <Users className="h-4 w-4 text-muted-foreground" />
-                        Manager Dashboard
-                      </button>
                     </motion.div>
                   )}
                 </AnimatePresence>
               </div>
-            </nav>
 
-            {/* Right Side */}
-            <div className="flex items-center gap-2">
               {/* Search */}
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
@@ -216,7 +270,7 @@ const V2Layout = () => {
         </div>
       </header>
 
-      {/* Content — chat no longer affects layout */}
+      {/* Content */}
       <div className="relative z-10">
         <main className="max-w-[1440px] mx-auto">
           <Outlet />
@@ -225,8 +279,8 @@ const V2Layout = () => {
       </div>
 
       {/* Click outside to close dropdowns */}
-      {(adminOpen || profileOpen) && (
-        <div className="fixed inset-0 z-30" onClick={() => { setAdminOpen(false); setProfileOpen(false); }} />
+      {(adminOpen || profileOpen || roleMenuOpen) && (
+        <div className="fixed inset-0 z-30" onClick={() => { setAdminOpen(false); setProfileOpen(false); setRoleMenuOpen(false); }} />
       )}
     </div>
   );
