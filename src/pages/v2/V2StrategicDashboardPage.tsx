@@ -3,9 +3,9 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
-  TrendingUp, Users, Target, Globe, Landmark, ShieldCheck,
-  ArrowUpRight, ArrowDownRight, BarChart3, Briefcase, Star,
-  Zap, Award, BookOpen, Brain, Building2
+  Target, Globe, Landmark,
+  ArrowUpRight, ArrowDownRight, Briefcase, Star,
+  Zap, Award, BookOpen, Brain
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
