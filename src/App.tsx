@@ -18,6 +18,7 @@ import TrainingPage from "./pages/admin/TrainingPage";
 import V2HomePage from "./pages/v2/V2HomePage";
 import V2DashboardPage from "./pages/v2/V2DashboardPage";
 import V2ProfilePage from "./pages/v2/V2ProfilePage";
+import V2CatalogueDetailPage from "./pages/v2/V2CatalogueDetailPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
