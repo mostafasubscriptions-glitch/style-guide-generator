@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   Home, LayoutDashboard, Compass, BookOpen, HelpCircle,
   Users, Award, GraduationCap, MessageSquare, Bell, Search,
-  ChevronDown, User, Settings, LogOut, BarChart3, Shield
+  ChevronDown, User, Settings, LogOut, BarChart3, Shield, Landmark
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import DaleelChat from "@/components/chat/DaleelChat";
@@ -43,6 +43,7 @@ const V2Layout = () => {
     { label: "FAQ", path: "/v2/faq", icon: HelpCircle, roles: ["employee", "manager", "ld", "strategic_leader"] },
     { label: "My Team", path: "/v2/manager", icon: Users, roles: ["manager"] },
     { label: "L&D Dashboard", path: "/v2/ld", icon: BarChart3, roles: ["ld"] },
+    { label: "Strategic", path: "/v2/strategic", icon: Landmark, roles: ["strategic_leader"] },
   ];
 
   const adminItems = [

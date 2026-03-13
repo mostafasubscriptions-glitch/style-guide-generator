@@ -23,6 +23,7 @@ import V2CatalogueDetailPage from "./pages/v2/V2CatalogueDetailPage";
 import V2LoginPage from "./pages/v2/V2LoginPage";
 import V2ManagerDashboardPage from "./pages/v2/V2ManagerDashboardPage";
 import V2LDDashboardPage from "./pages/v2/V2LDDashboardPage";
+import V2StrategicDashboardPage from "./pages/v2/V2StrategicDashboardPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -57,6 +58,7 @@ const App = () => (
               <Route path="/v2/profile" element={<V2ProfilePage />} />
               <Route path="/v2/manager" element={<V2ManagerDashboardPage />} />
               <Route path="/v2/ld" element={<V2LDDashboardPage />} />
+              <Route path="/v2/strategic" element={<V2StrategicDashboardPage />} />
             </Route>
             <Route path="/style-guide" element={<StyleGuidePage />} />
             <Route path="*" element={<NotFound />} />
