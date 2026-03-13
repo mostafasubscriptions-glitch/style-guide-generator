@@ -46,6 +46,7 @@ const App = () => (
             <Route path="/v2/dashboard" element={<V2DashboardPage />} />
             <Route path="/v2/wizard" element={<WizardPage />} />
             <Route path="/v2/catalogue" element={<CataloguePage />} />
+            <Route path="/v2/catalogue/:type/:id" element={<V2CatalogueDetailPage />} />
             <Route path="/v2/faq" element={<FAQPage />} />
             <Route path="/v2/profile" element={<V2ProfilePage />} />
           </Route>
