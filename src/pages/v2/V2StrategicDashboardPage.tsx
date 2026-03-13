@@ -79,7 +79,7 @@ const V2StrategicDashboardPage = () => {
           { icon: Globe, label: "Qatarization", value: `${kpis.qatarization.current}%`, target: `Target ${kpis.qatarization.target}%`, trend: kpis.qatarization.trend, color: "text-primary" },
           { icon: Target, label: "Workforce Readiness", value: `${kpis.workforceReadiness.current}%`, target: `Target ${kpis.workforceReadiness.target}%`, trend: kpis.workforceReadiness.trend, color: "text-info" },
           { icon: Briefcase, label: "Succession Coverage", value: `${kpis.successionCoverage.current}%`, target: `Target ${kpis.successionCoverage.target}%`, trend: kpis.successionCoverage.trend, color: "text-accent" },
-          { icon: Users, label: "Talent Retention", value: `${kpis.talentRetention.current}%`, target: `Target ${kpis.talentRetention.target}%`, trend: kpis.talentRetention.trend, color: "text-success" },
+          { icon: BookOpen, label: "Training Completion", value: `${kpis.trainingCompletion.current}%`, target: `Target ${kpis.trainingCompletion.target}%`, trend: kpis.trainingCompletion.trend, color: "text-success" },
           { icon: Zap, label: "L&D ROI", value: `${kpis.budgetROI.multiplier}x`, target: "Return on investment", trend: kpis.budgetROI.trend, color: "text-warning" },
         ].map(stat => (
           <Card key={stat.label} className="backdrop-blur-sm bg-card/80">
