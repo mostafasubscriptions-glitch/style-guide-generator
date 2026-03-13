@@ -100,22 +100,22 @@ const V2StrategicDashboardPage = () => {
         <Card className="backdrop-blur-sm bg-card/80 border-primary/15">
           <CardContent className="p-4 flex items-center gap-4">
             <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
-              <Users className="h-6 w-6 text-primary" />
+              <BookOpen className="h-6 w-6 text-primary" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-foreground">{kpis.totalWorkforce}</p>
-              <p className="text-[10px] text-muted-foreground">Total Workforce · {kpis.activeCDPs} Active CDPs</p>
+              <p className="text-2xl font-bold text-foreground">{kpis.enrolledLearners}</p>
+              <p className="text-[10px] text-muted-foreground">Active Learners · {kpis.activeCDPs} CDPs in progress</p>
             </div>
           </CardContent>
         </Card>
         <Card className="backdrop-blur-sm bg-card/80 border-accent/15">
           <CardContent className="p-4 flex items-center gap-4">
             <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center shrink-0">
-              <ShieldCheck className="h-6 w-6 text-accent" />
+              <Star className="h-6 w-6 text-accent" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-foreground">{kpis.criticalRolesFilled}/{kpis.criticalRoles}</p>
-              <p className="text-[10px] text-muted-foreground">Critical Roles Filled · {Math.round(kpis.criticalRolesFilled / kpis.criticalRoles * 100)}% coverage</p>
+              <p className="text-2xl font-bold text-foreground">{kpis.competencyMilestones}</p>
+              <p className="text-[10px] text-muted-foreground">Competency Milestones · achieved this quarter</p>
             </div>
           </CardContent>
         </Card>
