@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   Home, LayoutDashboard, Compass, BookOpen, HelpCircle,
   Users, Award, GraduationCap, MessageSquare, Bell, Search,
-  ChevronDown, User, Settings, LogOut, BarChart3, Shield
+  ChevronDown, User, Settings, LogOut, BarChart3, Shield, Landmark
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import DaleelChat from "@/components/chat/DaleelChat";
