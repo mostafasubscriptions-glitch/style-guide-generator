@@ -116,3 +116,7 @@
     transition: width 200ms ease-in-out, padding 200ms ease-in-out;
   }
 }
+
+.bg-v2-bg {
+  background: hsl(var(--background));
+}
