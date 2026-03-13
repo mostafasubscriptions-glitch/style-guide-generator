@@ -5,11 +5,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   Home, LayoutDashboard, Compass, BookOpen, HelpCircle,
   Users, Award, GraduationCap, MessageSquare, Bell, Search,
-  ChevronDown, User, Settings, LogOut, BarChart3, Shield, Landmark
+  ChevronDown, User, Settings, LogOut, BarChart3, Shield, Landmark, Moon, Sun
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import DaleelChat from "@/components/chat/DaleelChat";
+import NotificationsPanel from "@/components/notifications/NotificationsPanel";
+import OnboardingTour from "@/components/onboarding/OnboardingTour";
 import { useRole, UserRole } from "@/contexts/RoleContext";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const roleColors: Record<UserRole, string> = {
   employee: "bg-primary/15 text-primary",
@@ -29,12 +32,13 @@ const V2Layout = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { role, setRole, roleName } = useRole();
+  const { theme, toggleTheme } = useTheme();
   const [chatOpen, setChatOpen] = useState(false);
   const [adminOpen, setAdminOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
   const [roleMenuOpen, setRoleMenuOpen] = useState(false);
+  const [notificationsOpen, setNotificationsOpen] = useState(false);
 
-  // Base nav items for all roles
   const navItems = [
     { label: "Home", path: "/v2", icon: Home, roles: ["employee", "manager", "ld", "strategic_leader"] },
     { label: "Dashboard", path: "/v2/dashboard", icon: LayoutDashboard, roles: ["employee"] },
@@ -63,6 +67,9 @@ const V2Layout = () => {
         <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-accent/6 rounded-full blur-[100px]" />
         <div className="absolute top-1/2 left-1/2 w-[400px] h-[400px] bg-info/5 rounded-full blur-[80px]" />
       </div>
+
+      {/* Onboarding Tour */}
+      <OnboardingTour />
 
       {/* Top Navigation */}
       <header className="sticky top-0 z-40 backdrop-blur-xl bg-card/70 border-b border-border/50">
@@ -109,7 +116,7 @@ const V2Layout = () => {
                 );
               })}
 
-              {/* Admin Dropdown — only for ld role */}
+              {/* Admin Dropdown */}
               {(role === "ld" || role === "strategic_leader") && (
                 <div className="relative">
                   <button
@@ -197,6 +204,14 @@ const V2Layout = () => {
                 />
               </div>
 
+              {/* Theme Toggle */}
+              <button
+                onClick={toggleTheme}
+                className="w-9 h-9 rounded-xl flex items-center justify-center text-muted-foreground hover:bg-muted/50 transition-colors"
+              >
+                {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+              </button>
+
               {/* Daleel */}
               <button
                 onClick={() => setChatOpen(!chatOpen)}
@@ -212,7 +227,13 @@ const V2Layout = () => {
               </button>
 
               {/* Notifications */}
-              <button className="relative w-9 h-9 rounded-xl flex items-center justify-center text-muted-foreground hover:bg-muted/50 transition-colors">
+              <button
+                onClick={() => setNotificationsOpen(!notificationsOpen)}
+                className={cn(
+                  "relative w-9 h-9 rounded-xl flex items-center justify-center transition-colors",
+                  notificationsOpen ? "bg-primary/10 text-primary" : "text-muted-foreground hover:bg-muted/50"
+                )}
+              >
                 <Bell className="h-4 w-4" />
                 <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-destructive rounded-full" />
               </button>
@@ -278,6 +299,7 @@ const V2Layout = () => {
           <Outlet />
         </main>
         <DaleelChat open={chatOpen} onClose={() => setChatOpen(false)} />
+        <NotificationsPanel open={notificationsOpen} onClose={() => setNotificationsOpen(false)} />
       </div>
 
       {/* Click outside to close dropdowns */}
