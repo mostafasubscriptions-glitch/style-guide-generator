@@ -4,6 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import MainLayout from "@/components/layout/MainLayout";
+import V2Layout from "@/components/layout/V2Layout";
 import HomePage from "./pages/HomePage";
 import DashboardPage from "./pages/DashboardPage";
 import WizardPage from "./pages/WizardPage";
@@ -14,6 +15,8 @@ import StyleGuidePage from "./pages/StyleGuidePage";
 import PositionsPage from "./pages/admin/PositionsPage";
 import CertificationsPage from "./pages/admin/CertificationsPage";
 import TrainingPage from "./pages/admin/TrainingPage";
+import V2HomePage from "./pages/v2/V2HomePage";
+import V2DashboardPage from "./pages/v2/V2DashboardPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -35,6 +38,13 @@ const App = () => (
             <Route path="/admin/positions" element={<PositionsPage />} />
             <Route path="/admin/certifications" element={<CertificationsPage />} />
             <Route path="/admin/training" element={<TrainingPage />} />
+          </Route>
+          <Route element={<V2Layout />}>
+            <Route path="/v2" element={<V2HomePage />} />
+            <Route path="/v2/dashboard" element={<V2DashboardPage />} />
+            <Route path="/v2/wizard" element={<WizardPage />} />
+            <Route path="/v2/catalogue" element={<CataloguePage />} />
+            <Route path="/v2/faq" element={<FAQPage />} />
           </Route>
           <Route path="/style-guide" element={<StyleGuidePage />} />
           <Route path="*" element={<NotFound />} />
