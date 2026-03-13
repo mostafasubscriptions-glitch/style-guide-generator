@@ -43,6 +43,7 @@ const V2Layout = () => {
     { label: "FAQ", path: "/v2/faq", icon: HelpCircle, roles: ["employee", "manager", "ld", "strategic_leader"] },
     { label: "My Team", path: "/v2/manager", icon: Users, roles: ["manager"] },
     { label: "L&D Dashboard", path: "/v2/ld", icon: BarChart3, roles: ["ld"] },
+    { label: "Provision CDP", path: "/v2/ld/provision", icon: Compass, roles: ["ld"] },
     { label: "Strategic", path: "/v2/strategic", icon: Landmark, roles: ["strategic_leader"] },
   ];
 
