@@ -1,10 +1,11 @@
 import { useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import {
-  Search, Award, BookOpen, Star, ChevronDown, ChevronUp, ExternalLink
+  Search, Award, BookOpen, Star, ChevronDown, ChevronUp, ExternalLink, ArrowRight
 } from "lucide-react";
 import { certifications, trainings, providers } from "@/data/mockData";
 import { cn } from "@/lib/utils";
