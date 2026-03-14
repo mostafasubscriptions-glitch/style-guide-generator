@@ -112,8 +112,8 @@ const getRoleResponses = (role: UserRole): Record<string, { content: string; act
         "Which team members need attention?": {
           content: "Based on my analysis, these team members need attention:\n\n🔴 **Sara Al-Sulaiti** — Lowest readiness at 45%. Her CDP is pending your approval. She needs guidance on certification choices.\n\n🟡 **Mohammed Al-Kuwari** — CDP still in draft. 58% readiness with only 2 learning items planned. Needs encouragement to complete his plan.\n\n✅ **Noura Al-Hajri** is excelling — consider her for stretch assignments or mentoring others.",
           actions: [
-            { label: "View Sara's Profile", path: "/v2/manager/team/3" },
-            { label: "View Mohammed's Profile", path: "/v2/manager/team/4" },
+            { label: "View Sara's Profile", path: "/manager/team/3" },
+            { label: "View Mohammed's Profile", path: "/manager/team/4" },
           ],
         },
         "Help me prioritize pending approvals": {
