@@ -32,9 +32,9 @@ const getActions = (role: UserRole): ActionConfig[] => {
       ];
     case "manager":
       return [
-        { label: "My Team", desc: "View direct reports & CDPs", icon: Users, path: "/v2/manager", gradient: "from-primary to-primary-dark" },
-        { label: "Approve CDPs", desc: "5 pending approvals", icon: ClipboardCheck, path: "/v2/manager", gradient: "from-accent to-[hsl(43,86%,36%)]" },
-        { label: "Team Analytics", desc: "Competency & progress insights", icon: BarChart3, path: "/v2/manager", gradient: "from-info to-[hsl(213,93%,45%)]" },
+        { label: "My Team", desc: "View direct reports & CDPs", icon: Users, path: "/manager", gradient: "from-primary to-primary-dark" },
+        { label: "Approve CDPs", desc: "5 pending approvals", icon: ClipboardCheck, path: "/manager", gradient: "from-accent to-[hsl(43,86%,36%)]" },
+        { label: "Team Analytics", desc: "Competency & progress insights", icon: BarChart3, path: "/manager", gradient: "from-info to-[hsl(213,93%,45%)]" },
         { label: "Ask Daleel", desc: "AI advisor for managers", icon: MessageSquare, path: "#", gradient: "from-success to-[hsl(152,61%,27%)]" },
       ];
     case "ld":
