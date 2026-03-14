@@ -115,7 +115,7 @@ const V2TeamMemberDetailPage = () => {
   if (!member || !details) {
     return (
       <div className="p-6 max-w-6xl mx-auto">
-        <Button variant="ghost" onClick={() => navigate("/v2/manager")} className="gap-2 mb-4">
+        <Button variant="ghost" onClick={() => navigate("/manager")} className="gap-2 mb-4">
           <ArrowLeft className="h-4 w-4" /> Back to Team
         </Button>
         <p className="text-muted-foreground">Team member not found.</p>
