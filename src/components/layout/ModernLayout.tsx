@@ -40,15 +40,15 @@ const ModernLayout = () => {
   const [notificationsOpen, setNotificationsOpen] = useState(false);
 
   const navItems = [
-    { label: "Home", path: "/", icon: Home, color: "from-primary to-primary-dark", roles: ["employee", "manager", "ld", "strategic_leader"] },
-    { label: "Dashboard", path: "/dashboard", icon: LayoutDashboard, color: "from-info to-primary", roles: ["employee"] },
-    { label: "CDP Wizard", path: "/wizard", icon: Compass, color: "from-purple to-info", roles: ["employee"] },
-    { label: "Catalogue", path: "/catalogue", icon: BookOpen, color: "from-accent to-warning", roles: ["employee", "manager", "ld"] },
-    { label: "FAQ", path: "/faq", icon: HelpCircle, color: "from-success to-primary", roles: ["employee", "manager", "ld", "strategic_leader"] },
-    { label: "My Team", path: "/manager", icon: Users, color: "from-accent to-primary", roles: ["manager"] },
-    { label: "L&D Dashboard", path: "/ld", icon: BarChart3, color: "from-info to-purple", roles: ["ld"] },
-    { label: "Provision", path: "/ld/provision", icon: Compass, color: "from-purple to-accent", roles: ["ld"] },
-    { label: "Strategic", path: "/strategic", icon: Landmark, color: "from-warning to-accent", roles: ["strategic_leader"] },
+    { label: "Home", path: "/", icon: Home, roles: ["employee", "manager", "ld", "strategic_leader"] },
+    { label: "Dashboard", path: "/dashboard", icon: LayoutDashboard, roles: ["employee"] },
+    { label: "CDP Wizard", path: "/wizard", icon: Compass, roles: ["employee"] },
+    { label: "Catalogue", path: "/catalogue", icon: BookOpen, roles: ["employee", "manager", "ld"] },
+    { label: "FAQ", path: "/faq", icon: HelpCircle, roles: ["employee", "manager", "ld", "strategic_leader"] },
+    { label: "My Team", path: "/manager", icon: Users, roles: ["manager"] },
+    { label: "L&D Dashboard", path: "/ld", icon: BarChart3, roles: ["ld"] },
+    { label: "Provision CDP", path: "/ld/provision", icon: Compass, roles: ["ld"] },
+    { label: "Strategic", path: "/strategic", icon: Landmark, roles: ["strategic_leader"] },
   ];
 
   const adminItems = [
@@ -243,116 +243,79 @@ const ModernLayout = () => {
           </div>
         </div>
 
-        {/* Level 2: Vertical icon tile navigation */}
+        {/* Level 2: Navigation links */}
         <div className="border-t border-border/30">
-          <div className="max-w-[1440px] mx-auto px-6 py-3">
-            <div className="flex items-stretch gap-2">
+          <div className="max-w-[1440px] mx-auto px-6">
+            <nav className="flex items-center gap-1 h-11 -mb-px">
               {filteredNav.map((item) => {
                 const isActive =
                   location.pathname === item.path ||
                   (item.path !== "/" && location.pathname.startsWith(item.path));
                 return (
-                  <motion.button
+                  <button
                     key={item.path}
                     onClick={() => navigate(item.path)}
-                    whileHover={{ y: -3 }}
-                    whileTap={{ scale: 0.95 }}
                     className={cn(
-                      "relative flex-1 flex flex-col items-center gap-1.5 py-3 px-2 rounded-2xl text-xs font-medium transition-all duration-200 min-w-0 group",
+                      "relative flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200",
                       isActive
-                        ? "bg-card shadow-md border border-border/50"
-                        : "hover:bg-card/60 hover:shadow-sm"
+                        ? "text-primary"
+                        : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
                     )}
                   >
-                    <div className={cn(
-                      "w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-200",
-                      isActive
-                        ? `bg-gradient-to-br ${item.color} shadow-lg`
-                        : "bg-muted/60 group-hover:bg-muted"
-                    )}>
-                      <item.icon className={cn(
-                        "h-5 w-5 transition-colors",
-                        isActive ? "text-primary-foreground" : "text-muted-foreground group-hover:text-foreground"
-                      )} />
-                    </div>
-                    <span className={cn(
-                      "truncate max-w-full transition-colors",
-                      isActive ? "text-foreground font-semibold" : "text-muted-foreground group-hover:text-foreground"
-                    )}>
-                      {item.label}
-                    </span>
+                    <item.icon className="h-4 w-4" />
+                    <span>{item.label}</span>
                     {isActive && (
                       <motion.div
-                        layoutId="nav-indicator"
-                        className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-6 h-1 rounded-full bg-primary"
-                        transition={{ type: "spring", bounce: 0.3, duration: 0.5 }}
+                        layoutId="nav-pill"
+                        className="absolute inset-0 bg-primary/10 rounded-lg"
+                        transition={{ type: "spring", bounce: 0.2, duration: 0.4 }}
                       />
                     )}
-                  </motion.button>
+                  </button>
                 );
               })}
 
               {/* Admin Dropdown */}
               {(role === "ld" || role === "strategic_leader") && (
-                <>
-                  <div className="w-px bg-border/40 my-2" />
-                  <div className="relative">
-                    <motion.button
-                      onClick={() => setAdminOpen(!adminOpen)}
-                      whileHover={{ y: -3 }}
-                      whileTap={{ scale: 0.95 }}
-                      className={cn(
-                        "flex flex-col items-center gap-1.5 py-3 px-5 rounded-2xl text-xs font-medium transition-all duration-200 group",
-                        location.pathname.startsWith("/admin")
-                          ? "bg-card shadow-md border border-border/50"
-                          : "hover:bg-card/60 hover:shadow-sm"
-                      )}
-                    >
-                      <div className={cn(
-                        "w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-200",
-                        location.pathname.startsWith("/admin")
-                          ? "bg-gradient-to-br from-destructive/80 to-warning shadow-lg"
-                          : "bg-muted/60 group-hover:bg-muted"
-                      )}>
-                        <Settings className={cn(
-                          "h-5 w-5 transition-colors",
-                          location.pathname.startsWith("/admin") ? "text-primary-foreground" : "text-muted-foreground group-hover:text-foreground"
-                        )} />
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <span className={cn(
-                          "transition-colors",
-                          location.pathname.startsWith("/admin") ? "text-foreground font-semibold" : "text-muted-foreground group-hover:text-foreground"
-                        )}>Admin</span>
-                        <ChevronDown className={cn("h-3 w-3 text-muted-foreground transition-transform", adminOpen && "rotate-180")} />
-                      </div>
-                    </motion.button>
-                    <AnimatePresence>
-                      {adminOpen && (
-                        <motion.div
-                          initial={{ opacity: 0, y: 6 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: 6 }}
-                          transition={{ duration: 0.15 }}
-                          className="absolute top-full mt-2 right-0 w-52 bg-card border border-border/50 rounded-xl shadow-lg p-1.5 z-50"
-                        >
-                          {adminItems.map((item) => (
-                            <button
-                              key={item.path}
-                              onClick={() => { navigate(item.path); setAdminOpen(false); }}
-                              className="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-foreground hover:bg-muted/50 transition-colors"
-                            >
-                              <item.icon className="h-4 w-4 text-muted-foreground" />
-                              {item.label}
-                            </button>
-                          ))}
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-                </>
+                <div className="relative">
+                  <button
+                    onClick={() => setAdminOpen(!adminOpen)}
+                    className={cn(
+                      "flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all",
+                      location.pathname.startsWith("/admin")
+                        ? "text-primary"
+                        : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                    )}
+                  >
+                    <Settings className="h-4 w-4" />
+                    Admin
+                    <ChevronDown className={cn("h-3 w-3 transition-transform", adminOpen && "rotate-180")} />
+                  </button>
+                  <AnimatePresence>
+                    {adminOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 8, scale: 0.96 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 8, scale: 0.96 }}
+                        transition={{ duration: 0.15 }}
+                        className="absolute top-full mt-2 left-0 w-56 backdrop-blur-xl bg-card/90 border border-border/50 rounded-2xl shadow-xl shadow-black/10 p-2 z-50"
+                      >
+                        {adminItems.map((item) => (
+                          <button
+                            key={item.path}
+                            onClick={() => { navigate(item.path); setAdminOpen(false); }}
+                            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-foreground hover:bg-muted/50 transition-colors"
+                          >
+                            <item.icon className="h-4 w-4 text-muted-foreground" />
+                            {item.label}
+                          </button>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
               )}
-            </div>
+            </nav>
           </div>
         </div>
       </header>
