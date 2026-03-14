@@ -13,8 +13,7 @@ interface Props {
 
 const KanbanView = ({ items }: Props) => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const isV2 = location.pathname.startsWith("/v2");
+
 
   const grouped = items.reduce<Record<string, CatalogueItem[]>>((acc, item) => {
     if (!acc[item.provider]) acc[item.provider] = [];
