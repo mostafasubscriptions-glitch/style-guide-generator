@@ -161,8 +161,8 @@ const getRoleResponses = (role: UserRole): Record<string, { content: string; act
         "Show me department readiness overview": {
           content: "**Department Readiness Scores:**\n\n| Department | Readiness | Headcount | Gaps |\n|---|---|---|---|\n| HR & Corporate | **88%** ✅ | 28 | 3 |\n| Finance & Admin | **82%** ✅ | 38 | 5 |\n| Planning & Projects | **78%** 🟡 | 42 | 8 |\n| IT & Digital | **71%** 🟡 | 52 | 14 |\n| Operations | **65%** 🔴 | 156 | 23 |\n\n**Operations** has the largest gap count and lowest readiness. Given their headcount (156), targeted intervention could significantly move the overall score.",
           actions: [
-            { label: "Strategic Dashboard", path: "/v2/strategic" },
-            { label: "Org Analytics", path: "/v2/strategic" },
+            { label: "Strategic Dashboard", path: "/strategic" },
+            { label: "Org Analytics", path: "/strategic" },
           ],
         },
         "What are the critical talent risks?": {
