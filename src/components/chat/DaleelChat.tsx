@@ -130,8 +130,8 @@ const getRoleResponses = (role: UserRole): Record<string, { content: string; act
         "What are the top skill gaps across the organization?": {
           content: "Across all departments, the most common gaps are:\n\n🔴 **Critical (org-wide):**\n1. **Project Management** — 47 employees below target\n2. **Data Analytics** — 38 employees, growing demand\n3. **Risk Management** — 32 employees\n\n🟡 **Moderate:**\n4. Change Management — 28 employees\n5. Leadership — 25 employees\n6. Financial Analysis — 22 employees\n\n**Recommendation:** Consider launching a company-wide PMP preparation program and a Data Analytics bootcamp for Q3.",
           actions: [
-            { label: "L&D Dashboard", path: "/v2/ld" },
-            { label: "Provision Training", path: "/v2/ld/provision" },
+            { label: "L&D Dashboard", path: "/ld" },
+            { label: "Provision Training", path: "/ld/provision" },
           ],
         },
         "Which programs have the highest completion rates?": {
