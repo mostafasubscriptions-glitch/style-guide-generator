@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   Home, LayoutDashboard, Compass, BookOpen, HelpCircle,
   Users, Award, GraduationCap, MessageSquare, Bell, Search,
-  ChevronDown, User, Settings, LogOut, BarChart3, Shield, Landmark, Moon, Sun
+  ChevronDown, User, Settings, LogOut, BarChart3, Shield, Landmark, Moon, Sun, Layers
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import DaleelChat from "@/components/chat/DaleelChat";
@@ -28,11 +28,11 @@ const roleLabels: Record<UserRole, string> = {
   strategic_leader: "Strategic Leader",
 };
 
-const V2Layout = () => {
+const ModernLayout = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { role, setRole, roleName } = useRole();
-  const { theme, toggleTheme } = useTheme();
+  const { theme, toggleTheme, setLayoutTheme } = useTheme();
   const [chatOpen, setChatOpen] = useState(false);
   const [adminOpen, setAdminOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
@@ -40,15 +40,15 @@ const V2Layout = () => {
   const [notificationsOpen, setNotificationsOpen] = useState(false);
 
   const navItems = [
-    { label: "Home", path: "/v2", icon: Home, roles: ["employee", "manager", "ld", "strategic_leader"] },
-    { label: "Dashboard", path: "/v2/dashboard", icon: LayoutDashboard, roles: ["employee"] },
-    { label: "CDP Wizard", path: "/v2/wizard", icon: Compass, roles: ["employee"] },
-    { label: "Catalogue", path: "/v2/catalogue", icon: BookOpen, roles: ["employee", "manager", "ld"] },
-    { label: "FAQ", path: "/v2/faq", icon: HelpCircle, roles: ["employee", "manager", "ld", "strategic_leader"] },
-    { label: "My Team", path: "/v2/manager", icon: Users, roles: ["manager"] },
-    { label: "L&D Dashboard", path: "/v2/ld", icon: BarChart3, roles: ["ld"] },
-    { label: "Provision CDP", path: "/v2/ld/provision", icon: Compass, roles: ["ld"] },
-    { label: "Strategic", path: "/v2/strategic", icon: Landmark, roles: ["strategic_leader"] },
+    { label: "Home", path: "/", icon: Home, roles: ["employee", "manager", "ld", "strategic_leader"] },
+    { label: "Dashboard", path: "/dashboard", icon: LayoutDashboard, roles: ["employee"] },
+    { label: "CDP Wizard", path: "/wizard", icon: Compass, roles: ["employee"] },
+    { label: "Catalogue", path: "/catalogue", icon: BookOpen, roles: ["employee", "manager", "ld"] },
+    { label: "FAQ", path: "/faq", icon: HelpCircle, roles: ["employee", "manager", "ld", "strategic_leader"] },
+    { label: "My Team", path: "/manager", icon: Users, roles: ["manager"] },
+    { label: "L&D Dashboard", path: "/ld", icon: BarChart3, roles: ["ld"] },
+    { label: "Provision CDP", path: "/ld/provision", icon: Compass, roles: ["ld"] },
+    { label: "Strategic", path: "/strategic", icon: Landmark, roles: ["strategic_leader"] },
   ];
 
   const adminItems = [
@@ -68,7 +68,6 @@ const V2Layout = () => {
         <div className="absolute top-1/2 left-1/2 w-[400px] h-[400px] bg-info/5 rounded-full blur-[80px]" />
       </div>
 
-      {/* Onboarding Tour */}
       <OnboardingTour />
 
       {/* Top Navigation */}
@@ -76,7 +75,7 @@ const V2Layout = () => {
         <div className="max-w-[1440px] mx-auto px-6">
           <div className="flex items-center h-16 gap-8">
             {/* Logo */}
-            <div className="flex items-center gap-3 cursor-pointer shrink-0" onClick={() => navigate("/v2")}>
+            <div className="flex items-center gap-3 cursor-pointer shrink-0" onClick={() => navigate("/")}>
               <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center shadow-lg shadow-primary/25">
                 <span className="text-primary-foreground font-bold text-sm">M</span>
               </div>
@@ -91,7 +90,7 @@ const V2Layout = () => {
               {filteredNav.map((item) => {
                 const isActive =
                   location.pathname === item.path ||
-                  (item.path !== "/v2" && location.pathname.startsWith(item.path));
+                  (item.path !== "/" && location.pathname.startsWith(item.path));
                 return (
                   <button
                     key={item.path}
@@ -180,7 +179,7 @@ const V2Layout = () => {
                       {(Object.keys(roleLabels) as UserRole[]).map((r) => (
                         <button
                           key={r}
-                          onClick={() => { setRole(r); setRoleMenuOpen(false); navigate("/v2"); }}
+                          onClick={() => { setRole(r); setRoleMenuOpen(false); navigate("/"); }}
                           className={cn(
                             "w-full flex items-center gap-2 px-3 py-2 rounded-xl text-xs transition-colors",
                             role === r ? "bg-primary/10 text-primary font-medium" : "text-foreground hover:bg-muted/50"
@@ -210,6 +209,15 @@ const V2Layout = () => {
                 className="w-9 h-9 rounded-xl flex items-center justify-center text-muted-foreground hover:bg-muted/50 transition-colors"
               >
                 {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+              </button>
+
+              {/* Layout Toggle */}
+              <button
+                onClick={() => setLayoutTheme("classic")}
+                className="w-9 h-9 rounded-xl flex items-center justify-center text-muted-foreground hover:bg-muted/50 transition-colors"
+                title="Switch to Classic layout"
+              >
+                <Layers className="h-4 w-4" />
               </button>
 
               {/* Daleel */}
@@ -269,7 +277,7 @@ const V2Layout = () => {
                       </div>
                       <div className="pt-2 space-y-1">
                         <button
-                          onClick={() => { navigate("/v2/profile"); setProfileOpen(false); }}
+                          onClick={() => { navigate("/profile"); setProfileOpen(false); }}
                           className="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-sm text-foreground hover:bg-muted/50 transition-colors"
                         >
                           <User className="h-4 w-4 text-muted-foreground" /> Profile
@@ -278,7 +286,7 @@ const V2Layout = () => {
                           <Settings className="h-4 w-4 text-muted-foreground" /> Settings
                         </button>
                         <button
-                          onClick={() => { navigate("/v2/login"); setProfileOpen(false); }}
+                          onClick={() => { navigate("/login"); setProfileOpen(false); }}
                           className="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-sm text-destructive hover:bg-destructive/10 transition-colors"
                         >
                           <LogOut className="h-4 w-4" /> Sign out
@@ -310,4 +318,4 @@ const V2Layout = () => {
   );
 };
 
-export default V2Layout;
+export default ModernLayout;

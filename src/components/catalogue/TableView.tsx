@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
 import { Table, TableHeader, TableBody, TableHead, TableRow, TableCell } from "@/components/ui/table";
 import { Award, BookOpen, Star, ArrowUpDown } from "lucide-react";
@@ -14,8 +14,8 @@ type SortKey = "code" | "title" | "provider" | "level" | "cost" | "duration";
 
 const TableView = ({ items }: Props) => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const isV2 = location.pathname.startsWith("/v2");
+
+
   const [sortKey, setSortKey] = useState<SortKey>("code");
   const [sortAsc, setSortAsc] = useState(true);
 
@@ -71,7 +71,7 @@ const TableView = ({ items }: Props) => {
                 item.type === "Certification" && "border-l-4 border-l-accent"
               )}
               onClick={() => {
-                if (isV2) navigate(`/v2/catalogue/${item.type === "Certification" ? "cert" : "course"}/${item.type === "Certification" ? item.id : item.id - 100}`);
+                navigate(`/catalogue/${item.type === "Certification" ? "cert" : "course"}/${item.type === "Certification" ? item.id : item.id - 100}`);
               }}
             >
               <TableCell>

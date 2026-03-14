@@ -90,7 +90,7 @@ const V2ManagerDashboardPage = () => {
         {/* TEAM OVERVIEW */}
         <TabsContent value="team" className="space-y-3">
           {teamMembers.map(member => (
-            <Card key={member.id} className="backdrop-blur-sm bg-card/80 hover:shadow-md transition-shadow cursor-pointer" onClick={() => navigate(`/v2/manager/team/${member.id}`)}>
+            <Card key={member.id} className="backdrop-blur-sm bg-card/80 hover:shadow-md transition-shadow cursor-pointer" onClick={() => navigate(`/manager/team/${member.id}`)}>
               <CardContent className="p-4">
                 <div className="flex items-center gap-4">
                   <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary/80 to-accent/80 flex items-center justify-center shrink-0">
@@ -123,7 +123,7 @@ const V2ManagerDashboardPage = () => {
                       </div>
                     </div>
                   </div>
-                  <Button variant="ghost" size="sm" className="h-8 w-8 p-0 shrink-0" onClick={(e) => { e.stopPropagation(); navigate(`/v2/manager/team/${member.id}`); }}>
+                  <Button variant="ghost" size="sm" className="h-8 w-8 p-0 shrink-0" onClick={(e) => { e.stopPropagation(); navigate(`/manager/team/${member.id}`); }}>
                     <Eye className="h-4 w-4 text-muted-foreground" />
                   </Button>
                 </div>

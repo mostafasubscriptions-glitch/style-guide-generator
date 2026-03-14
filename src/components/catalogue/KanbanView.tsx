@@ -1,4 +1,4 @@
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Award, BookOpen, Star, ArrowRight } from "lucide-react";
@@ -13,8 +13,7 @@ interface Props {
 
 const KanbanView = ({ items }: Props) => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const isV2 = location.pathname.startsWith("/v2");
+
 
   const grouped = items.reduce<Record<string, CatalogueItem[]>>((acc, item) => {
     if (!acc[item.provider]) acc[item.provider] = [];
@@ -54,7 +53,7 @@ const KanbanView = ({ items }: Props) => {
                       item.type === "Certification" && "border-l-4 border-l-accent"
                     )}
                     onClick={() => {
-                      if (isV2) navigate(`/v2/catalogue/${item.type === "Certification" ? "cert" : "course"}/${item.type === "Certification" ? item.id : item.id - 100}`);
+                      navigate(`/catalogue/${item.type === "Certification" ? "cert" : "course"}/${item.type === "Certification" ? item.id : item.id - 100}`);
                     }}
                   >
                     <CardContent className="p-3">
@@ -89,7 +88,7 @@ const KanbanView = ({ items }: Props) => {
                         <Badge variant="outline" className="text-[9px] text-primary border-primary/30">{item.competencyName}</Badge>
                       </div>
 
-                      {isV2 && (
+                      {(
                         <div className="mt-2 pt-2 border-t border-border">
                           <button className="text-[10px] text-primary flex items-center gap-1 hover:underline">
                             View Details <ArrowRight className="h-2.5 w-2.5" />

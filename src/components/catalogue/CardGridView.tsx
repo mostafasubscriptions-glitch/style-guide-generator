@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Award, BookOpen, Star, ChevronDown, ChevronUp, ExternalLink, ArrowRight } from "lucide-react";
@@ -13,8 +13,8 @@ interface Props {
 
 const CardGridView = ({ items }: Props) => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const isV2 = location.pathname.startsWith("/v2");
+
+
   const [expandedId, setExpandedId] = useState<number | null>(null);
 
   const getProviderInfo = (name: string) => providers.find(p => p.name === name);
@@ -85,9 +85,9 @@ const CardGridView = ({ items }: Props) => {
                     {isExpanded ? "Less" : "Details"}
                     {isExpanded ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />}
                   </button>
-                  {isV2 && (
+                  {(
                     <button
-                      onClick={() => navigate(`/v2/catalogue/${item.type === "Certification" ? "cert" : "course"}/${item.type === "Certification" ? item.id : item.id - 100}`)}
+                      onClick={() => navigate(`/catalogue/${item.type === "Certification" ? "cert" : "course"}/${item.type === "Certification" ? item.id : item.id - 100}`)}
                       className="text-xs text-primary flex items-center gap-1 hover:underline"
                     >
                       Full Page <ArrowRight className="h-3 w-3" />

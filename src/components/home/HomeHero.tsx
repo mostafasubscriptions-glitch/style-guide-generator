@@ -25,8 +25,8 @@ const heroConfig: Record<UserRole, {
     statValue: `${activePlan.completionPercent}%`,
     statPercent: activePlan.completionPercent,
     actions: [
-      { label: "Start CDP Wizard", icon: Compass, path: "/v2/wizard", primary: true },
-      { label: "Browse Catalogue", icon: BookOpen, path: "/v2/catalogue" },
+      { label: "Start CDP Wizard", icon: Compass, path: "/wizard", primary: true },
+      { label: "Browse Catalogue", icon: BookOpen, path: "/catalogue" },
     ],
   },
   manager: {
@@ -36,8 +36,8 @@ const heroConfig: Record<UserRole, {
     statValue: "72%",
     statPercent: 72,
     actions: [
-      { label: "Review Team", icon: Users, path: "/v2/manager", primary: true },
-      { label: "Pending Approvals", icon: BarChart3, path: "/v2/manager" },
+      { label: "Review Team", icon: Users, path: "/manager", primary: true },
+      { label: "Pending Approvals", icon: BarChart3, path: "/manager" },
     ],
   },
   ld: {
@@ -47,8 +47,8 @@ const heroConfig: Record<UserRole, {
     statValue: "84%",
     statPercent: 84,
     actions: [
-      { label: "L&D Dashboard", icon: BarChart3, path: "/v2/ld", primary: true },
-      { label: "Provision Training", icon: BookOpen, path: "/v2/ld/provision" },
+      { label: "L&D Dashboard", icon: BarChart3, path: "/ld", primary: true },
+      { label: "Provision Training", icon: BookOpen, path: "/ld/provision" },
     ],
   },
   strategic_leader: {
@@ -58,8 +58,8 @@ const heroConfig: Record<UserRole, {
     statValue: "68%",
     statPercent: 68,
     actions: [
-      { label: "Strategic Dashboard", icon: Building2, path: "/v2/strategic", primary: true },
-      { label: "Org Analytics", icon: BarChart3, path: "/v2/strategic" },
+      { label: "Strategic Dashboard", icon: Building2, path: "/strategic", primary: true },
+      { label: "Org Analytics", icon: BarChart3, path: "/strategic" },
     ],
   },
 };

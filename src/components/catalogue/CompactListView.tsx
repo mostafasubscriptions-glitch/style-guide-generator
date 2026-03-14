@@ -1,4 +1,4 @@
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
 import { Award, BookOpen, Star, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -10,8 +10,7 @@ interface Props {
 
 const CompactListView = ({ items }: Props) => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const isV2 = location.pathname.startsWith("/v2");
+
 
   return (
     <div className="space-y-1">
@@ -23,7 +22,7 @@ const CompactListView = ({ items }: Props) => {
             item.type === "Certification" && "border-l-4 border-l-accent"
           )}
           onClick={() => {
-            if (isV2) navigate(`/v2/catalogue/${item.type === "Certification" ? "cert" : "course"}/${item.type === "Certification" ? item.id : item.id - 100}`);
+            navigate(`/catalogue/${item.type === "Certification" ? "cert" : "course"}/${item.type === "Certification" ? item.id : item.id - 100}`);
           }}
         >
           <div className={cn(
@@ -55,7 +54,7 @@ const CompactListView = ({ items }: Props) => {
           <span className="text-xs text-muted-foreground hidden lg:block w-16 text-center">{item.duration}</span>
           <span className="text-sm font-semibold text-foreground w-24 text-right">QAR {item.cost.toLocaleString()}</span>
 
-          {isV2 && (
+          {(
             <ArrowRight className="h-4 w-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity shrink-0" />
           )}
         </div>

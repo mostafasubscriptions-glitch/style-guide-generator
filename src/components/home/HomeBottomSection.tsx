@@ -90,7 +90,7 @@ const EmployeeBottom = () => {
               </div>
             ))}
           </div>
-          <Button variant="ghost" className="w-full mt-4 text-primary rounded-xl gap-2" onClick={() => navigate("/v2/dashboard")}>
+          <Button variant="ghost" className="w-full mt-4 text-primary rounded-xl gap-2" onClick={() => navigate("/dashboard")}>
             View all items <ArrowRight className="h-4 w-4" />
           </Button>
         </CardContent>
@@ -137,7 +137,7 @@ const ManagerBottom = () => {
               </div>
             ))}
           </div>
-          <Button variant="ghost" className="w-full mt-4 text-primary rounded-xl gap-2" onClick={() => navigate("/v2/manager")}>
+          <Button variant="ghost" className="w-full mt-4 text-primary rounded-xl gap-2" onClick={() => navigate("/manager")}>
             View all approvals <ArrowRight className="h-4 w-4" />
           </Button>
         </CardContent>
@@ -186,7 +186,7 @@ const LDBottom = () => {
               </div>
             ))}
           </div>
-          <Button variant="ghost" className="w-full mt-4 text-primary rounded-xl gap-2" onClick={() => navigate("/v2/ld")}>
+          <Button variant="ghost" className="w-full mt-4 text-primary rounded-xl gap-2" onClick={() => navigate("/ld")}>
             View all programs <ArrowRight className="h-4 w-4" />
           </Button>
         </CardContent>
@@ -236,7 +236,7 @@ const StrategicBottom = () => {
               </div>
             ))}
           </div>
-          <Button variant="ghost" className="w-full mt-4 text-primary rounded-xl gap-2" onClick={() => navigate("/v2/strategic")}>
+          <Button variant="ghost" className="w-full mt-4 text-primary rounded-xl gap-2" onClick={() => navigate("/strategic")}>
             Full analytics <ArrowRight className="h-4 w-4" />
           </Button>
         </CardContent>

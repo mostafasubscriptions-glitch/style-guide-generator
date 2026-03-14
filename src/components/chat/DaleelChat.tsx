@@ -79,22 +79,22 @@ const getRoleResponses = (role: UserRole): Record<string, { content: string; act
         "What certifications should I pursue?": {
           content: "Based on your profile, I strongly recommend:\n\n**1. PMP (Project Management Professional)** — Your top priority. You have a critical gap in Project Management (Level 3 → 5), and PMP is the industry gold standard.\n\n**2. RMP (Risk Management Professional)** — Addresses your risk management gap (Level 2 → 4).\n\nBoth are **Qatar Recommended** and highly valued in the transport sector.\n\nWould you like me to help you plan a study schedule?",
           actions: [
-            { label: "Browse Certifications", path: "/v2/catalogue" },
-            { label: "Start CDP Wizard", path: "/v2/wizard" },
+            { label: "Browse Certifications", path: "/catalogue" },
+            { label: "Start CDP Wizard", path: "/wizard" },
           ],
         },
         "Help me understand my competency gaps": {
           content: "Looking at your profile vs. your target **Senior PM** role:\n\n🔴 **Critical Gaps:**\n- Project Management: Level 3/5 → need Level 5\n- Risk Management: Level 2/5 → need Level 4\n\n🟡 **Moderate Gaps:**\n- Leadership: Level 3/4\n- Strategic Planning: Level 3/4\n- Financial Analysis: Level 2/3\n- Change Management: Level 3/4\n\n✅ **Met:** Stakeholder Management, Communication\n\nI'd recommend starting with the critical gaps first.",
           actions: [
-            { label: "View Dashboard", path: "/v2/dashboard" },
-            { label: "Start CDP Wizard", path: "/v2/wizard" },
+            { label: "View Dashboard", path: "/dashboard" },
+            { label: "Start CDP Wizard", path: "/wizard" },
           ],
         },
         "What career paths are available to me?": {
           content: "Based on your current role as **Senior Project Coordinator (G7)**, here are your possible paths:\n\n📈 **Vertical Growth:**\n- Project Manager (G8) — 1-2 years\n- Senior Project Manager (G9) — 3-4 years\n- Head of Projects (G10) — 5+ years\n\n↔️ **Lateral Move:**\n- Operations Manager (G8)\n- IT Project Lead (G8)\n\nYour strongest path is toward **Project Manager** given your current competencies. You'd need PMP + leadership development to be fully ready.",
           actions: [
-            { label: "View Career Paths", path: "/v2/catalogue" },
-            { label: "My Profile", path: "/v2/profile" },
+            { label: "View Career Paths", path: "/catalogue" },
+            { label: "My Profile", path: "/profile" },
           ],
         },
       };
@@ -105,21 +105,21 @@ const getRoleResponses = (role: UserRole): Record<string, { content: string; act
         "How is my team progressing on their CDPs?": {
           content: "Here's your team's CDP status overview:\n\n✅ **Khalid Al-Mohannadi** — Approved, 72% readiness, 3 learning items\n⏳ **Sara Al-Sulaiti** — Pending Approval, 45% readiness\n📝 **Mohammed Al-Kuwari** — Draft, 58% readiness\n🔄 **Noura Al-Hajri** — In Progress, 81% readiness, 4 learning items\n\n**Key Insight:** Sara's CDP needs your approval, and Mohammed hasn't submitted his yet. Noura is your strongest performer.",
           actions: [
-            { label: "View My Team", path: "/v2/manager" },
-            { label: "Review Sara's CDP", path: "/v2/manager/team/3" },
+            { label: "View My Team", path: "/manager" },
+            { label: "Review Sara's CDP", path: "/manager/team/3" },
           ],
         },
         "Which team members need attention?": {
           content: "Based on my analysis, these team members need attention:\n\n🔴 **Sara Al-Sulaiti** — Lowest readiness at 45%. Her CDP is pending your approval. She needs guidance on certification choices.\n\n🟡 **Mohammed Al-Kuwari** — CDP still in draft. 58% readiness with only 2 learning items planned. Needs encouragement to complete his plan.\n\n✅ **Noura Al-Hajri** is excelling — consider her for stretch assignments or mentoring others.",
           actions: [
-            { label: "View Sara's Profile", path: "/v2/manager/team/3" },
-            { label: "View Mohammed's Profile", path: "/v2/manager/team/4" },
+            { label: "View Sara's Profile", path: "/manager/team/3" },
+            { label: "View Mohammed's Profile", path: "/manager/team/4" },
           ],
         },
         "Help me prioritize pending approvals": {
           content: "You have **5 pending approvals**. Here's my recommended priority:\n\n1. 🔴 **Sara Al-Sulaiti** — CDP Plan Approval (submitted 2 days ago, Q2 deadline approaching)\n2. 🟡 **Noura Al-Kuwari** — Training Request for PMP (exam slot may fill up)\n3. **Omar Hassan** — Mentorship Assignment\n4. **Maryam Al-Thani** — Course Enrollment\n5. **Youssef Kamal** — CDP Extension\n\nI recommend approving Sara and Noura today to keep them on track.",
           actions: [
-            { label: "Go to Approvals", path: "/v2/manager" },
+            { label: "Go to Approvals", path: "/manager" },
           ],
         },
       };
@@ -130,21 +130,21 @@ const getRoleResponses = (role: UserRole): Record<string, { content: string; act
         "What are the top skill gaps across the organization?": {
           content: "Across all departments, the most common gaps are:\n\n🔴 **Critical (org-wide):**\n1. **Project Management** — 47 employees below target\n2. **Data Analytics** — 38 employees, growing demand\n3. **Risk Management** — 32 employees\n\n🟡 **Moderate:**\n4. Change Management — 28 employees\n5. Leadership — 25 employees\n6. Financial Analysis — 22 employees\n\n**Recommendation:** Consider launching a company-wide PMP preparation program and a Data Analytics bootcamp for Q3.",
           actions: [
-            { label: "L&D Dashboard", path: "/v2/ld" },
-            { label: "Provision Training", path: "/v2/ld/provision" },
+            { label: "L&D Dashboard", path: "/ld" },
+            { label: "Provision Training", path: "/ld/provision" },
           ],
         },
         "Which programs have the highest completion rates?": {
           content: "Here are your top-performing programs:\n\n🏆 **Highest Completion:**\n1. Six Sigma Green Belt — **96%** (22/22 completed)\n2. Agile Leadership Workshop — **89%** (12/15)\n3. PMP Certification Cohort — **78%** (14/18)\n\n📉 **Lowest Completion:**\n1. Data Analytics Bootcamp — **42%** (needs review)\n2. Change Management Cert — **55%**\n\n**Insight:** Shorter, workshop-based programs show higher engagement. Consider breaking longer programs into modules.",
           actions: [
-            { label: "View All Programs", path: "/v2/ld" },
+            { label: "View All Programs", path: "/ld" },
           ],
         },
         "Recommend training for the upcoming quarter": {
           content: "Based on gap analysis and strategic priorities, here's my Q3 recommendation:\n\n**Must-Have:**\n1. 🎯 PMP Prep Program — Addresses #1 org gap (est. 25 seats)\n2. 🎯 Data Analytics Fundamentals — High demand, aligns with Digital Transformation priority\n\n**Should-Have:**\n3. Risk Management Workshop — 32 employees need this\n4. Leadership Development Series — For G7→G8 pipeline\n\n**Estimated Budget:** QAR 185,000\n**ROI Projection:** Closes 40% of critical gaps by Q4.",
           actions: [
-            { label: "Provision Training", path: "/v2/ld/provision" },
-            { label: "Budget Overview", path: "/v2/ld" },
+            { label: "Provision Training", path: "/ld/provision" },
+            { label: "Budget Overview", path: "/ld" },
           ],
         },
       };
@@ -155,21 +155,21 @@ const getRoleResponses = (role: UserRole): Record<string, { content: string; act
         "How aligned is our workforce with Vision 2030?": {
           content: "Overall workforce alignment with **Qatar National Vision 2030** priorities:\n\n📊 **Alignment Score: 68%**\n\n**By Pillar:**\n- 🟢 Human Development: **78%** — Strong L&D programs\n- 🟡 Economic Development: **65%** — Need more business/finance skills\n- 🟡 Social Development: **62%** — Leadership pipeline gaps\n- 🔴 Environmental Development: **52%** — Sustainability skills lacking\n\n**Key Action:** Invest in sustainability and environmental management certifications to improve the weakest pillar.",
           actions: [
-            { label: "Strategic Dashboard", path: "/v2/strategic" },
+            { label: "Strategic Dashboard", path: "/strategic" },
           ],
         },
         "Show me department readiness overview": {
           content: "**Department Readiness Scores:**\n\n| Department | Readiness | Headcount | Gaps |\n|---|---|---|---|\n| HR & Corporate | **88%** ✅ | 28 | 3 |\n| Finance & Admin | **82%** ✅ | 38 | 5 |\n| Planning & Projects | **78%** 🟡 | 42 | 8 |\n| IT & Digital | **71%** 🟡 | 52 | 14 |\n| Operations | **65%** 🔴 | 156 | 23 |\n\n**Operations** has the largest gap count and lowest readiness. Given their headcount (156), targeted intervention could significantly move the overall score.",
           actions: [
-            { label: "Strategic Dashboard", path: "/v2/strategic" },
-            { label: "Org Analytics", path: "/v2/strategic" },
+            { label: "Strategic Dashboard", path: "/strategic" },
+            { label: "Org Analytics", path: "/strategic" },
           ],
         },
         "What are the critical talent risks?": {
           content: "**Top Talent Risks:**\n\n🔴 **Succession Gaps:**\n- 23 critical positions have no identified successor\n- 5 department heads approaching retirement within 3 years\n\n🔴 **Skill Concentration:**\n- Only 3 employees hold advanced data analytics capabilities\n- PMP-certified PMs are concentrated in one department\n\n🟡 **Retention Risk:**\n- 12 high-performers in G7-G8 range have stalled CDPs\n- External market demand for transport professionals is rising\n\n**Recommendation:** Launch an accelerated succession planning program for the 23 critical positions.",
           actions: [
-            { label: "Talent Pipeline", path: "/v2/strategic" },
-            { label: "Strategic Dashboard", path: "/v2/strategic" },
+            { label: "Talent Pipeline", path: "/strategic" },
+            { label: "Strategic Dashboard", path: "/strategic" },
           ],
         },
       };

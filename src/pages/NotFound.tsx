@@ -11,7 +11,7 @@ const NotFound = () => {
     console.error("404 Error: User attempted to access non-existent route:", location.pathname);
   }, [location.pathname]);
 
-  const isV2 = location.pathname.startsWith("/v2");
+  
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background">
@@ -21,7 +21,7 @@ const NotFound = () => {
         <p className="text-sm text-muted-foreground max-w-sm">
           The page <code className="text-xs bg-muted px-1.5 py-0.5 rounded">{location.pathname}</code> doesn't exist.
         </p>
-        <Button onClick={() => navigate(isV2 ? "/v2" : "/")} className="gap-2 rounded-xl">
+        <Button onClick={() => navigate("/")} className="gap-2 rounded-xl">
           <Home className="h-4 w-4" /> Back to Home
         </Button>
       </div>

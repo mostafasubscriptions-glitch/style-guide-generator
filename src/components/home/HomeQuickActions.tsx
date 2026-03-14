@@ -25,30 +25,30 @@ const getActions = (role: UserRole): ActionConfig[] => {
   switch (role) {
     case "employee":
       return [
-        { label: "CDP Wizard", desc: "Create your development plan", icon: Compass, path: "/v2/wizard", gradient: "from-primary to-primary-dark" },
-        { label: "Browse Catalogue", desc: "Explore certifications & courses", icon: BookOpen, path: "/v2/catalogue", gradient: "from-info to-[hsl(213,93%,45%)]" },
+        { label: "CDP Wizard", desc: "Create your development plan", icon: Compass, path: "/wizard", gradient: "from-primary to-primary-dark" },
+        { label: "Browse Catalogue", desc: "Explore certifications & courses", icon: BookOpen, path: "/catalogue", gradient: "from-info to-[hsl(213,93%,45%)]" },
         { label: "Ask Daleel", desc: "AI career advisor", icon: MessageSquare, path: "#", gradient: "from-accent to-[hsl(43,86%,36%)]" },
-        { label: "My Dashboard", desc: activePlan.planCode, icon: FileText, path: "/v2/dashboard", gradient: "from-success to-[hsl(152,61%,27%)]" },
+        { label: "My Dashboard", desc: activePlan.planCode, icon: FileText, path: "/dashboard", gradient: "from-success to-[hsl(152,61%,27%)]" },
       ];
     case "manager":
       return [
-        { label: "My Team", desc: "View direct reports & CDPs", icon: Users, path: "/v2/manager", gradient: "from-primary to-primary-dark" },
-        { label: "Approve CDPs", desc: "5 pending approvals", icon: ClipboardCheck, path: "/v2/manager", gradient: "from-accent to-[hsl(43,86%,36%)]" },
-        { label: "Team Analytics", desc: "Competency & progress insights", icon: BarChart3, path: "/v2/manager", gradient: "from-info to-[hsl(213,93%,45%)]" },
+        { label: "My Team", desc: "View direct reports & CDPs", icon: Users, path: "/manager", gradient: "from-primary to-primary-dark" },
+        { label: "Approve CDPs", desc: "5 pending approvals", icon: ClipboardCheck, path: "/manager", gradient: "from-accent to-[hsl(43,86%,36%)]" },
+        { label: "Team Analytics", desc: "Competency & progress insights", icon: BarChart3, path: "/manager", gradient: "from-info to-[hsl(213,93%,45%)]" },
         { label: "Ask Daleel", desc: "AI advisor for managers", icon: MessageSquare, path: "#", gradient: "from-success to-[hsl(152,61%,27%)]" },
       ];
     case "ld":
       return [
-        { label: "L&D Dashboard", desc: "Organization-wide analytics", icon: BarChart3, path: "/v2/ld", gradient: "from-primary to-primary-dark" },
-        { label: "Provision Training", desc: "Schedule & assign programs", icon: BookOpen, path: "/v2/ld/provision", gradient: "from-info to-[hsl(213,93%,45%)]" },
-        { label: "Manage Catalogue", desc: "Curate certifications & courses", icon: Settings, path: "/v2/catalogue", gradient: "from-accent to-[hsl(43,86%,36%)]" },
+        { label: "L&D Dashboard", desc: "Organization-wide analytics", icon: BarChart3, path: "/ld", gradient: "from-primary to-primary-dark" },
+        { label: "Provision Training", desc: "Schedule & assign programs", icon: BookOpen, path: "/ld/provision", gradient: "from-info to-[hsl(213,93%,45%)]" },
+        { label: "Manage Catalogue", desc: "Curate certifications & courses", icon: Settings, path: "/catalogue", gradient: "from-accent to-[hsl(43,86%,36%)]" },
         { label: "Ask Daleel", desc: "AI-powered L&D insights", icon: MessageSquare, path: "#", gradient: "from-success to-[hsl(152,61%,27%)]" },
       ];
     case "strategic_leader":
       return [
-        { label: "Strategic Dashboard", desc: "Workforce alignment overview", icon: Building2, path: "/v2/strategic", gradient: "from-primary to-primary-dark" },
-        { label: "Org Analytics", desc: "Cross-department insights", icon: BarChart3, path: "/v2/strategic", gradient: "from-info to-[hsl(213,93%,45%)]" },
-        { label: "Talent Pipeline", desc: "Succession & readiness", icon: Users, path: "/v2/strategic", gradient: "from-accent to-[hsl(43,86%,36%)]" },
+        { label: "Strategic Dashboard", desc: "Workforce alignment overview", icon: Building2, path: "/strategic", gradient: "from-primary to-primary-dark" },
+        { label: "Org Analytics", desc: "Cross-department insights", icon: BarChart3, path: "/strategic", gradient: "from-info to-[hsl(213,93%,45%)]" },
+        { label: "Talent Pipeline", desc: "Succession & readiness", icon: Users, path: "/strategic", gradient: "from-accent to-[hsl(43,86%,36%)]" },
         { label: "Ask Daleel", desc: "AI strategic advisor", icon: MessageSquare, path: "#", gradient: "from-success to-[hsl(152,61%,27%)]" },
       ];
   }
