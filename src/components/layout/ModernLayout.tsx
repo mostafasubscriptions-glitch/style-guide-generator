@@ -40,15 +40,15 @@ const ModernLayout = () => {
   const [notificationsOpen, setNotificationsOpen] = useState(false);
 
   const navItems = [
-    { label: "Home", path: "/", icon: Home, roles: ["employee", "manager", "ld", "strategic_leader"] },
-    { label: "Dashboard", path: "/dashboard", icon: LayoutDashboard, roles: ["employee"] },
-    { label: "CDP Wizard", path: "/wizard", icon: Compass, roles: ["employee"] },
-    { label: "Catalogue", path: "/catalogue", icon: BookOpen, roles: ["employee", "manager", "ld"] },
-    { label: "FAQ", path: "/faq", icon: HelpCircle, roles: ["employee", "manager", "ld", "strategic_leader"] },
-    { label: "My Team", path: "/manager", icon: Users, roles: ["manager"] },
-    { label: "L&D Dashboard", path: "/ld", icon: BarChart3, roles: ["ld"] },
-    { label: "Provision CDP", path: "/ld/provision", icon: Compass, roles: ["ld"] },
-    { label: "Strategic", path: "/strategic", icon: Landmark, roles: ["strategic_leader"] },
+    { label: "Home", path: "/", icon: Home, color: "from-primary to-primary-dark", roles: ["employee", "manager", "ld", "strategic_leader"] },
+    { label: "Dashboard", path: "/dashboard", icon: LayoutDashboard, color: "from-info to-primary", roles: ["employee"] },
+    { label: "CDP Wizard", path: "/wizard", icon: Compass, color: "from-purple to-info", roles: ["employee"] },
+    { label: "Catalogue", path: "/catalogue", icon: BookOpen, color: "from-accent to-warning", roles: ["employee", "manager", "ld"] },
+    { label: "FAQ", path: "/faq", icon: HelpCircle, color: "from-success to-primary", roles: ["employee", "manager", "ld", "strategic_leader"] },
+    { label: "My Team", path: "/manager", icon: Users, color: "from-accent to-primary", roles: ["manager"] },
+    { label: "L&D Dashboard", path: "/ld", icon: BarChart3, color: "from-info to-purple", roles: ["ld"] },
+    { label: "Provision", path: "/ld/provision", icon: Compass, color: "from-purple to-accent", roles: ["ld"] },
+    { label: "Strategic", path: "/strategic", icon: Landmark, color: "from-warning to-accent", roles: ["strategic_leader"] },
   ];
 
   const adminItems = [
