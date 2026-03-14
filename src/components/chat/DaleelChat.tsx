@@ -119,7 +119,7 @@ const getRoleResponses = (role: UserRole): Record<string, { content: string; act
         "Help me prioritize pending approvals": {
           content: "You have **5 pending approvals**. Here's my recommended priority:\n\n1. 🔴 **Sara Al-Sulaiti** — CDP Plan Approval (submitted 2 days ago, Q2 deadline approaching)\n2. 🟡 **Noura Al-Kuwari** — Training Request for PMP (exam slot may fill up)\n3. **Omar Hassan** — Mentorship Assignment\n4. **Maryam Al-Thani** — Course Enrollment\n5. **Youssef Kamal** — CDP Extension\n\nI recommend approving Sara and Noura today to keep them on track.",
           actions: [
-            { label: "Go to Approvals", path: "/v2/manager" },
+            { label: "Go to Approvals", path: "/manager" },
           ],
         },
       };
