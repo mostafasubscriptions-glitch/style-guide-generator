@@ -27,6 +27,10 @@ import V2TeamMemberDetailPage from "./pages/v2/V2TeamMemberDetailPage";
 import V2LDDashboardPage from "./pages/v2/V2LDDashboardPage";
 import V2LDProvisionPage from "./pages/v2/V2LDProvisionPage";
 import V2StrategicDashboardPage from "./pages/v2/V2StrategicDashboardPage";
+import V2EmployeeCataloguePage from "./pages/v2/V2EmployeeCataloguePage";
+import V2ManagerCataloguePage from "./pages/v2/V2ManagerCataloguePage";
+import V2LDCataloguePage from "./pages/v2/V2LDCataloguePage";
+import V2LeaderCataloguePage from "./pages/v2/V2LeaderCataloguePage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -65,6 +69,10 @@ const App = () => (
                 <Route path="/v2/ld" element={<V2LDDashboardPage />} />
                 <Route path="/v2/ld/provision" element={<V2LDProvisionPage />} />
                 <Route path="/v2/strategic" element={<V2StrategicDashboardPage />} />
+                <Route path="/v2/catalogue/employee" element={<V2EmployeeCataloguePage />} />
+                <Route path="/v2/catalogue/manager" element={<V2ManagerCataloguePage />} />
+                <Route path="/v2/catalogue/ld" element={<V2LDCataloguePage />} />
+                <Route path="/v2/catalogue/leader" element={<V2LeaderCataloguePage />} />
               </Route>
               <Route path="/style-guide" element={<StyleGuidePage />} />
               <Route path="*" element={<NotFound />} />
