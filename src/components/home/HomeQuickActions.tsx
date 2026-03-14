@@ -25,10 +25,10 @@ const getActions = (role: UserRole): ActionConfig[] => {
   switch (role) {
     case "employee":
       return [
-        { label: "CDP Wizard", desc: "Create your development plan", icon: Compass, path: "/v2/wizard", gradient: "from-primary to-primary-dark" },
-        { label: "Browse Catalogue", desc: "Explore certifications & courses", icon: BookOpen, path: "/v2/catalogue", gradient: "from-info to-[hsl(213,93%,45%)]" },
+        { label: "CDP Wizard", desc: "Create your development plan", icon: Compass, path: "/wizard", gradient: "from-primary to-primary-dark" },
+        { label: "Browse Catalogue", desc: "Explore certifications & courses", icon: BookOpen, path: "/catalogue", gradient: "from-info to-[hsl(213,93%,45%)]" },
         { label: "Ask Daleel", desc: "AI career advisor", icon: MessageSquare, path: "#", gradient: "from-accent to-[hsl(43,86%,36%)]" },
-        { label: "My Dashboard", desc: activePlan.planCode, icon: FileText, path: "/v2/dashboard", gradient: "from-success to-[hsl(152,61%,27%)]" },
+        { label: "My Dashboard", desc: activePlan.planCode, icon: FileText, path: "/dashboard", gradient: "from-success to-[hsl(152,61%,27%)]" },
       ];
     case "manager":
       return [
