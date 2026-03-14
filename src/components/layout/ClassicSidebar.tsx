@@ -127,10 +127,10 @@ const ClassicSidebar = ({ collapsed, onToggle }: Props) => {
         <button
           onClick={() => setLayoutTheme("modern")}
           className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-md text-sm text-sidebar-foreground hover:bg-sidebar-accent transition-colors"
-          title={collapsed ? "Switch to Modern" : undefined}
+          title={collapsed ? "Horizontal Nav" : undefined}
         >
           <Layers className="h-4 w-4" />
-          {!collapsed && <span className="text-xs">Switch to Modern</span>}
+          {!collapsed && <span className="text-xs">Horizontal Nav</span>}
         </button>
         <button
           onClick={onToggle}

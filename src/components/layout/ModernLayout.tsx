@@ -214,10 +214,10 @@ const ModernLayout = () => {
               {/* Layout Toggle */}
               <button
                 onClick={() => setLayoutTheme("classic")}
-                className="w-9 h-9 rounded-xl flex items-center justify-center text-muted-foreground hover:bg-muted/50 transition-colors"
-                title="Switch to Classic layout"
+                className="w-9 h-9 rounded-xl flex items-center justify-center text-muted-foreground hover:bg-muted/50 transition-colors group"
+                title="Switch to Sidebar Navigation"
               >
-                <Layers className="h-4 w-4" />
+                <LayoutDashboard className="h-4 w-4 group-hover:text-primary transition-colors" />
               </button>
 
               {/* Daleel */}
