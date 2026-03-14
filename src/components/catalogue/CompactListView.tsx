@@ -10,8 +10,7 @@ interface Props {
 
 const CompactListView = ({ items }: Props) => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const isV2 = location.pathname.startsWith("/v2");
+
 
   return (
     <div className="space-y-1">
