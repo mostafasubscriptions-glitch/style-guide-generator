@@ -7,6 +7,7 @@ import { useTheme } from "@/contexts/ThemeContext";
 import { cn } from "@/lib/utils";
 import { Shield, ChevronDown } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { UserRole } from "@/contexts/RoleContext";
 
@@ -35,6 +36,7 @@ const ClassicTopBar = ({ onToggleChat, chatOpen, onToggleNotifications, notifica
   const { role, setRole, roleName } = useRole();
   const { theme, toggleTheme } = useTheme();
   const [roleMenuOpen, setRoleMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <header className="h-14 border-b border-border bg-card flex items-center justify-between px-6 shrink-0">
@@ -72,7 +74,7 @@ const ClassicTopBar = ({ onToggleChat, chatOpen, onToggleNotifications, notifica
                 {(Object.keys(roleLabels) as UserRole[]).map((r) => (
                   <button
                     key={r}
-                    onClick={() => { setRole(r); setRoleMenuOpen(false); }}
+                    onClick={() => { setRole(r); setRoleMenuOpen(false); navigate("/"); }}
                     className={cn(
                       "w-full flex items-center gap-2 px-3 py-2 rounded-lg text-xs transition-colors",
                       role === r ? "bg-primary/10 text-primary font-medium" : "text-foreground hover:bg-muted/50"
@@ -110,10 +112,12 @@ const ClassicTopBar = ({ onToggleChat, chatOpen, onToggleNotifications, notifica
         </Button>
 
         <div className="flex items-center gap-2 ml-2 pl-2 border-l border-border">
-          <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
-            <span className="text-xs font-semibold text-primary-foreground">AA</span>
-          </div>
-          <span className="text-sm font-medium text-foreground hidden lg:block">Ahmed Al-Thani</span>
+          <button onClick={() => navigate("/profile")} className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+            <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
+              <span className="text-xs font-semibold text-primary-foreground">AA</span>
+            </div>
+            <span className="text-sm font-medium text-foreground hidden lg:block">Ahmed Al-Thani</span>
+          </button>
         </div>
       </div>
 

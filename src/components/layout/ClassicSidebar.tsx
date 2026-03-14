@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import {
   Home, LayoutDashboard, Compass, BookOpen, HelpCircle,
   Award, GraduationCap, Users, PanelLeftClose, PanelLeft,
-  BarChart3, Landmark, Settings, Layers
+  BarChart3, Landmark, Settings, Layers, LogOut
 } from "lucide-react";
 import { useRole } from "@/contexts/RoleContext";
 import { useTheme } from "@/contexts/ThemeContext";
@@ -113,17 +113,40 @@ const ClassicSidebar = ({ collapsed, onToggle }: Props) => {
 
       {/* User + collapse + layout switch */}
       <div className="border-t border-sidebar-border p-3 space-y-1">
-        {!collapsed && (
-          <div className="flex items-center gap-3 px-2 py-2 mb-2">
-            <div className="w-8 h-8 rounded-full bg-sidebar-accent flex items-center justify-center">
+      <button
+          onClick={() => navigate("/profile")}
+          className={cn(
+            "w-full flex items-center gap-3 px-3 py-2 rounded-md text-sm transition-colors duration-150",
+            location.pathname === "/profile"
+              ? "bg-sidebar-primary text-sidebar-primary-foreground"
+              : "text-sidebar-foreground hover:bg-sidebar-accent"
+          )}
+          title={collapsed ? "Profile" : undefined}
+        >
+          {!collapsed ? (
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-full bg-sidebar-accent flex items-center justify-center shrink-0">
+                <span className="text-xs font-semibold text-sidebar-accent-foreground">AA</span>
+              </div>
+              <div className="overflow-hidden">
+                <p className="text-xs font-medium text-sidebar-foreground truncate">Ahmed Al-Thani</p>
+                <p className="text-[10px] text-sidebar-muted truncate">G7 · Planning & Projects</p>
+              </div>
+            </div>
+          ) : (
+            <div className="w-8 h-8 rounded-full bg-sidebar-accent flex items-center justify-center mx-auto">
               <span className="text-xs font-semibold text-sidebar-accent-foreground">AA</span>
             </div>
-            <div className="overflow-hidden">
-              <p className="text-xs font-medium text-sidebar-foreground truncate">Ahmed Al-Thani</p>
-              <p className="text-[10px] text-sidebar-muted truncate">G7 · Planning & Projects</p>
-            </div>
-          </div>
-        )}
+          )}
+        </button>
+        <button
+          onClick={() => navigate("/login")}
+          className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-md text-sm text-destructive hover:bg-destructive/10 transition-colors"
+          title={collapsed ? "Sign Out" : undefined}
+        >
+          <LogOut className="h-4 w-4" />
+          {!collapsed && <span className="text-xs">Sign Out</span>}
+        </button>
         <button
           onClick={() => setLayoutTheme("modern")}
           className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-md text-sm text-sidebar-foreground hover:bg-sidebar-accent transition-colors"
