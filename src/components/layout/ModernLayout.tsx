@@ -40,15 +40,15 @@ const ModernLayout = () => {
   const [notificationsOpen, setNotificationsOpen] = useState(false);
 
   const navItems = [
-    { label: "Home", path: "/", icon: Home, roles: ["employee", "manager", "ld", "strategic_leader"] },
-    { label: "Dashboard", path: "/dashboard", icon: LayoutDashboard, roles: ["employee"] },
-    { label: "CDP Wizard", path: "/wizard", icon: Compass, roles: ["employee"] },
-    { label: "Catalogue", path: "/catalogue", icon: BookOpen, roles: ["employee", "manager", "ld"] },
-    { label: "FAQ", path: "/faq", icon: HelpCircle, roles: ["employee", "manager", "ld", "strategic_leader"] },
-    { label: "My Team", path: "/manager", icon: Users, roles: ["manager"] },
-    { label: "L&D Dashboard", path: "/ld", icon: BarChart3, roles: ["ld"] },
-    { label: "Provision CDP", path: "/ld/provision", icon: Compass, roles: ["ld"] },
-    { label: "Strategic", path: "/strategic", icon: Landmark, roles: ["strategic_leader"] },
+    { label: "Home", path: "/", icon: Home, color: "from-primary to-primary-dark", roles: ["employee", "manager", "ld", "strategic_leader"] },
+    { label: "Dashboard", path: "/dashboard", icon: LayoutDashboard, color: "from-info to-primary", roles: ["employee"] },
+    { label: "CDP Wizard", path: "/wizard", icon: Compass, color: "from-purple to-info", roles: ["employee"] },
+    { label: "Catalogue", path: "/catalogue", icon: BookOpen, color: "from-accent to-warning", roles: ["employee", "manager", "ld"] },
+    { label: "FAQ", path: "/faq", icon: HelpCircle, color: "from-success to-primary", roles: ["employee", "manager", "ld", "strategic_leader"] },
+    { label: "My Team", path: "/manager", icon: Users, color: "from-accent to-primary", roles: ["manager"] },
+    { label: "L&D Dashboard", path: "/ld", icon: BarChart3, color: "from-info to-purple", roles: ["ld"] },
+    { label: "Provision", path: "/ld/provision", icon: Compass, color: "from-purple to-accent", roles: ["ld"] },
+    { label: "Strategic", path: "/strategic", icon: Landmark, color: "from-warning to-accent", roles: ["strategic_leader"] },
   ];
 
   const adminItems = [
@@ -243,10 +243,10 @@ const ModernLayout = () => {
           </div>
         </div>
 
-        {/* Level 2: Floating tab-bar navigation */}
-        <div className="relative">
+        {/* Level 2: Vertical icon tile navigation */}
+        <div className="border-t border-border/30">
           <div className="max-w-[1440px] mx-auto px-6 py-3">
-            <div className="flex items-center gap-2 p-1.5 rounded-2xl bg-muted/40 backdrop-blur-sm border border-border/30">
+            <div className="flex items-stretch gap-2">
               {filteredNav.map((item) => {
                 const isActive =
                   location.pathname === item.path ||
@@ -255,27 +255,36 @@ const ModernLayout = () => {
                   <motion.button
                     key={item.path}
                     onClick={() => navigate(item.path)}
+                    whileHover={{ y: -3 }}
                     whileTap={{ scale: 0.95 }}
                     className={cn(
-                      "relative flex-1 flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-medium transition-colors duration-200 min-w-0",
+                      "relative flex-1 flex flex-col items-center gap-1.5 py-3 px-2 rounded-2xl text-xs font-medium transition-all duration-200 min-w-0 group",
                       isActive
-                        ? "text-primary"
-                        : "text-muted-foreground hover:text-foreground"
+                        ? "bg-card shadow-md border border-border/50"
+                        : "hover:bg-card/60 hover:shadow-sm"
                     )}
                   >
+                    <div className={cn(
+                      "w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-200",
+                      isActive
+                        ? `bg-gradient-to-br ${item.color} shadow-lg`
+                        : "bg-muted/60 group-hover:bg-muted"
+                    )}>
+                      <item.icon className={cn(
+                        "h-5 w-5 transition-colors",
+                        isActive ? "text-primary-foreground" : "text-muted-foreground group-hover:text-foreground"
+                      )} />
+                    </div>
+                    <span className={cn(
+                      "truncate max-w-full transition-colors",
+                      isActive ? "text-foreground font-semibold" : "text-muted-foreground group-hover:text-foreground"
+                    )}>
+                      {item.label}
+                    </span>
                     {isActive && (
                       <motion.div
-                        layoutId="nav-tab"
-                        className="absolute inset-0 bg-card rounded-xl shadow-sm border border-border/50"
-                        transition={{ type: "spring", bounce: 0.2, duration: 0.45 }}
-                      />
-                    )}
-                    <item.icon className="h-4 w-4 relative z-10 shrink-0" />
-                    <span className="relative z-10 truncate">{item.label}</span>
-                    {isActive && (
-                      <motion.div
-                        layoutId="nav-dot"
-                        className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-primary z-10"
+                        layoutId="nav-indicator"
+                        className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-6 h-1 rounded-full bg-primary"
                         transition={{ type: "spring", bounce: 0.3, duration: 0.5 }}
                       />
                     )}
@@ -286,21 +295,37 @@ const ModernLayout = () => {
               {/* Admin Dropdown */}
               {(role === "ld" || role === "strategic_leader") && (
                 <>
-                  <div className="w-px h-8 bg-border/50" />
+                  <div className="w-px bg-border/40 my-2" />
                   <div className="relative">
                     <motion.button
                       onClick={() => setAdminOpen(!adminOpen)}
+                      whileHover={{ y: -3 }}
                       whileTap={{ scale: 0.95 }}
                       className={cn(
-                        "flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-sm font-medium transition-colors duration-200",
+                        "flex flex-col items-center gap-1.5 py-3 px-5 rounded-2xl text-xs font-medium transition-all duration-200 group",
                         location.pathname.startsWith("/admin")
-                          ? "text-primary bg-card shadow-sm border border-border/50"
-                          : "text-muted-foreground hover:text-foreground"
+                          ? "bg-card shadow-md border border-border/50"
+                          : "hover:bg-card/60 hover:shadow-sm"
                       )}
                     >
-                      <Settings className="h-4 w-4" />
-                      Admin
-                      <ChevronDown className={cn("h-3 w-3 transition-transform", adminOpen && "rotate-180")} />
+                      <div className={cn(
+                        "w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-200",
+                        location.pathname.startsWith("/admin")
+                          ? "bg-gradient-to-br from-destructive/80 to-warning shadow-lg"
+                          : "bg-muted/60 group-hover:bg-muted"
+                      )}>
+                        <Settings className={cn(
+                          "h-5 w-5 transition-colors",
+                          location.pathname.startsWith("/admin") ? "text-primary-foreground" : "text-muted-foreground group-hover:text-foreground"
+                        )} />
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <span className={cn(
+                          "transition-colors",
+                          location.pathname.startsWith("/admin") ? "text-foreground font-semibold" : "text-muted-foreground group-hover:text-foreground"
+                        )}>Admin</span>
+                        <ChevronDown className={cn("h-3 w-3 text-muted-foreground transition-transform", adminOpen && "rotate-180")} />
+                      </div>
                     </motion.button>
                     <AnimatePresence>
                       {adminOpen && (
