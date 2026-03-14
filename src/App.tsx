@@ -27,6 +27,10 @@ import V2TeamMemberDetailPage from "./pages/v2/V2TeamMemberDetailPage";
 import V2LDDashboardPage from "./pages/v2/V2LDDashboardPage";
 import V2LDProvisionPage from "./pages/v2/V2LDProvisionPage";
 import V2StrategicDashboardPage from "./pages/v2/V2StrategicDashboardPage";
+import V2EmployeeCataloguePage from "./pages/v2/V2EmployeeCataloguePage";
+import V2ManagerCataloguePage from "./pages/v2/V2ManagerCataloguePage";
+import V2LDCataloguePage from "./pages/v2/V2LDCataloguePage";
+import V2LeaderCataloguePage from "./pages/v2/V2LeaderCataloguePage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
