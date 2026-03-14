@@ -168,8 +168,8 @@ const getRoleResponses = (role: UserRole): Record<string, { content: string; act
         "What are the critical talent risks?": {
           content: "**Top Talent Risks:**\n\n🔴 **Succession Gaps:**\n- 23 critical positions have no identified successor\n- 5 department heads approaching retirement within 3 years\n\n🔴 **Skill Concentration:**\n- Only 3 employees hold advanced data analytics capabilities\n- PMP-certified PMs are concentrated in one department\n\n🟡 **Retention Risk:**\n- 12 high-performers in G7-G8 range have stalled CDPs\n- External market demand for transport professionals is rising\n\n**Recommendation:** Launch an accelerated succession planning program for the 23 critical positions.",
           actions: [
-            { label: "Talent Pipeline", path: "/v2/strategic" },
-            { label: "Strategic Dashboard", path: "/v2/strategic" },
+            { label: "Talent Pipeline", path: "/strategic" },
+            { label: "Strategic Dashboard", path: "/strategic" },
           ],
         },
       };
