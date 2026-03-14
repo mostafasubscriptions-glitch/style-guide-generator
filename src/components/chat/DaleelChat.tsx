@@ -86,8 +86,8 @@ const getRoleResponses = (role: UserRole): Record<string, { content: string; act
         "Help me understand my competency gaps": {
           content: "Looking at your profile vs. your target **Senior PM** role:\n\n🔴 **Critical Gaps:**\n- Project Management: Level 3/5 → need Level 5\n- Risk Management: Level 2/5 → need Level 4\n\n🟡 **Moderate Gaps:**\n- Leadership: Level 3/4\n- Strategic Planning: Level 3/4\n- Financial Analysis: Level 2/3\n- Change Management: Level 3/4\n\n✅ **Met:** Stakeholder Management, Communication\n\nI'd recommend starting with the critical gaps first.",
           actions: [
-            { label: "View Dashboard", path: "/v2/dashboard" },
-            { label: "Start CDP Wizard", path: "/v2/wizard" },
+            { label: "View Dashboard", path: "/dashboard" },
+            { label: "Start CDP Wizard", path: "/wizard" },
           ],
         },
         "What career paths are available to me?": {
