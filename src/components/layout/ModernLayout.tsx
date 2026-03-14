@@ -244,76 +244,120 @@ const ModernLayout = () => {
         </div>
 
         {/* Level 2: Navigation links */}
-        <div className="border-t border-border/30 bg-muted/20">
+        <div className="border-t border-border/30 bg-gradient-to-r from-muted/30 via-transparent to-muted/30">
           <div className="max-w-[1440px] mx-auto px-6">
-            <nav className="flex items-center gap-2 h-12">
+            <nav className="flex items-center gap-1.5 h-16 py-2">
               {filteredNav.map((item) => {
                 const isActive =
                   location.pathname === item.path ||
                   (item.path !== "/" && location.pathname.startsWith(item.path));
+
+                const iconColorMap: Record<string, string> = {
+                  "/": "from-primary to-primary-dark",
+                  "/dashboard": "from-info to-primary",
+                  "/wizard": "from-purple to-info",
+                  "/catalogue": "from-accent to-warning",
+                  "/faq": "from-success to-primary",
+                  "/manager": "from-accent to-primary",
+                  "/ld": "from-info to-purple",
+                  "/ld/provision": "from-purple to-accent",
+                  "/strategic": "from-warning to-accent",
+                };
+                const iconGradient = iconColorMap[item.path] || "from-primary to-primary-dark";
+
                 return (
                   <motion.button
                     key={item.path}
                     onClick={() => navigate(item.path)}
-                    whileHover={{ y: -1 }}
-                    whileTap={{ scale: 0.97 }}
+                    whileHover={{ y: -2, scale: 1.02 }}
+                    whileTap={{ scale: 0.96 }}
                     className={cn(
-                      "relative flex items-center gap-2.5 px-5 py-2 rounded-xl text-sm font-medium transition-all duration-200",
+                      "relative flex items-center gap-3 px-5 py-2.5 rounded-2xl text-sm font-semibold transition-all duration-300",
                       isActive
-                        ? "text-primary-foreground"
-                        : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
+                        ? "text-primary-foreground shadow-lg"
+                        : "text-muted-foreground hover:text-foreground hover:bg-card/60 hover:shadow-md hover:shadow-primary/5"
                     )}
                   >
                     {isActive && (
                       <motion.div
                         layoutId="nav-pill"
-                        className="absolute inset-0 bg-gradient-to-r from-primary to-primary-dark rounded-xl shadow-md shadow-primary/20"
-                        transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
+                        className="absolute inset-0 bg-gradient-to-r from-primary via-primary-dark to-primary rounded-2xl shadow-lg shadow-primary/30"
+                        transition={{ type: "spring", bounce: 0.15, duration: 0.5 }}
                       />
                     )}
-                    <item.icon className={cn("h-4 w-4 relative z-10", isActive && "text-primary-foreground")} />
+                    <div className={cn(
+                      "relative z-10 w-8 h-8 rounded-xl flex items-center justify-center transition-all duration-300",
+                      isActive
+                        ? "bg-primary-foreground/20 shadow-inner"
+                        : `bg-gradient-to-br ${iconGradient} shadow-sm`
+                    )}>
+                      <item.icon className={cn(
+                        "h-4 w-4 transition-colors",
+                        isActive ? "text-primary-foreground" : "text-primary-foreground"
+                      )} />
+                    </div>
                     <span className="relative z-10">{item.label}</span>
                   </motion.button>
                 );
               })}
 
-
+              {/* Separator */}
+              {(role === "ld" || role === "strategic_leader") && (
+                <div className="w-px h-8 bg-border/40 mx-1" />
+              )}
 
               {/* Admin Dropdown */}
               {(role === "ld" || role === "strategic_leader") && (
                 <div className="relative">
-                  <button
+                  <motion.button
                     onClick={() => setAdminOpen(!adminOpen)}
+                    whileHover={{ y: -2, scale: 1.02 }}
+                    whileTap={{ scale: 0.96 }}
                     className={cn(
-                      "flex items-center gap-2.5 px-5 py-2 rounded-xl text-sm font-medium transition-all",
+                      "flex items-center gap-3 px-5 py-2.5 rounded-2xl text-sm font-semibold transition-all duration-300",
                       location.pathname.startsWith("/admin")
-                        ? "text-primary"
-                        : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
+                        ? "text-primary bg-primary/10 shadow-md shadow-primary/10"
+                        : "text-muted-foreground hover:text-foreground hover:bg-card/60 hover:shadow-md hover:shadow-primary/5"
                     )}
                   >
-                    <Settings className="h-4 w-4" />
+                    <div className={cn(
+                      "w-8 h-8 rounded-xl flex items-center justify-center shadow-sm",
+                      location.pathname.startsWith("/admin")
+                        ? "bg-gradient-to-br from-primary to-primary-dark"
+                        : "bg-gradient-to-br from-destructive/80 to-warning/80"
+                    )}>
+                      <Settings className="h-4 w-4 text-primary-foreground" />
+                    </div>
                     Admin
-                    <ChevronDown className={cn("h-3 w-3 transition-transform", adminOpen && "rotate-180")} />
-                  </button>
+                    <ChevronDown className={cn("h-3.5 w-3.5 transition-transform duration-300", adminOpen && "rotate-180")} />
+                  </motion.button>
                   <AnimatePresence>
                     {adminOpen && (
                       <motion.div
-                        initial={{ opacity: 0, y: 8, scale: 0.96 }}
+                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: 8, scale: 0.96 }}
-                        transition={{ duration: 0.15 }}
-                        className="absolute top-full mt-2 left-0 w-56 backdrop-blur-xl bg-card/90 border border-border/50 rounded-2xl shadow-xl shadow-black/10 p-2 z-50"
+                        exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                        transition={{ duration: 0.2, ease: "easeOut" }}
+                        className="absolute top-full mt-3 left-0 w-60 backdrop-blur-2xl bg-card/95 border border-border/50 rounded-2xl shadow-2xl shadow-black/15 p-2.5 z-50"
                       >
-                        {adminItems.map((item) => (
-                          <button
-                            key={item.path}
-                            onClick={() => { navigate(item.path); setAdminOpen(false); }}
-                            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-foreground hover:bg-muted/50 transition-colors"
-                          >
-                            <item.icon className="h-4 w-4 text-muted-foreground" />
-                            {item.label}
-                          </button>
-                        ))}
+                        {adminItems.map((item, idx) => {
+                          const adminColors = ["from-info to-primary", "from-accent to-warning", "from-purple to-info"];
+                          return (
+                            <motion.button
+                              key={item.path}
+                              initial={{ opacity: 0, x: -10 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              transition={{ delay: idx * 0.05 }}
+                              onClick={() => { navigate(item.path); setAdminOpen(false); }}
+                              className="w-full flex items-center gap-3 px-3 py-3 rounded-xl text-sm text-foreground hover:bg-muted/50 transition-all duration-200 group"
+                            >
+                              <div className={cn("w-8 h-8 rounded-lg bg-gradient-to-br flex items-center justify-center shadow-sm group-hover:shadow-md transition-shadow", adminColors[idx])}>
+                                <item.icon className="h-4 w-4 text-primary-foreground" />
+                              </div>
+                              <span className="font-medium">{item.label}</span>
+                            </motion.button>
+                          );
+                        })}
                       </motion.div>
                     )}
                   </AnimatePresence>
