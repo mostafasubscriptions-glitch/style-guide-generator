@@ -1,0 +1,289 @@
+import { useState } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Users, ClipboardCheck, GraduationCap, Award, Star,
+  ThumbsUp, ThumbsDown, ChevronRight, Eye, TrendingUp,
+  CheckCircle2, Clock, AlertTriangle, Brain, Target, Sparkles
+} from "lucide-react";
+import { teamMembers, pendingApprovals } from "@/data/mockData";
+import { cn } from "@/lib/utils";
+
+const teamTraining = [
+  { memberId: 2, name: "Khalid Al-Mohannadi", activeCourses: 2, completedThisQuarter: 3, certsPending: 1, spendYTD: 4200 },
+  { memberId: 3, name: "Sara Al-Sulaiti", activeCourses: 1, completedThisQuarter: 1, certsPending: 0, spendYTD: 800 },
+  { memberId: 4, name: "Mohammed Al-Kuwari", activeCourses: 2, completedThisQuarter: 2, certsPending: 1, spendYTD: 3100 },
+  { memberId: 5, name: "Noura Al-Hajri", activeCourses: 3, completedThisQuarter: 4, certsPending: 2, spendYTD: 6800 },
+];
+
+const goalApprovals = [
+  { id: 1, employee: "Khalid Al-Mohannadi", goal: "Earn PMP Certification by Q2 2026", type: "certification", submitted: "2026-03-10" },
+  { id: 2, employee: "Sara Al-Sulaiti", goal: "Complete 3 leadership courses by Q3 2026", type: "learning", submitted: "2026-03-11" },
+  { id: 3, employee: "Mohammed Al-Kuwari", goal: "Achieve Level 4 in Risk Management", type: "competency", submitted: "2026-03-12" },
+];
+
+const competencyEndorsements = [
+  { id: 1, employee: "Noura Al-Hajri", competency: "Project Management", currentLevel: 4, requestedLevel: 5, evidence: "Led 3 major projects successfully" },
+  { id: 2, employee: "Khalid Al-Mohannadi", competency: "Stakeholder Management", currentLevel: 3, requestedLevel: 4, evidence: "Positive feedback from 5 stakeholders" },
+];
+
+const highPotentials = [
+  { id: 5, name: "Noura Al-Hajri", readiness: 81, reason: "Top performer with fastest learning velocity, completed 4 courses this quarter", recommendation: "Fast-track to Senior PM" },
+  { id: 2, name: "Khalid Al-Mohannadi", readiness: 72, reason: "Strong technical skills, PMP exam scheduled, consistent improvement trend", recommendation: "Ready for stretch assignment" },
+];
+
+const V2ManagerCataloguePage = () => {
+  const [activeTab, setActiveTab] = useState("plans");
+
+  return (
+    <div className="p-6 animate-fade-in max-w-6xl mx-auto">
+      <div className="mb-6">
+        <h1 className="text-xl font-bold text-foreground">Team Development Hub</h1>
+        <p className="text-xs text-muted-foreground">Review plans, approve goals, track training, and identify high-potential talent</p>
+      </div>
+
+      {/* Summary Stats */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+        {[
+          { icon: ClipboardCheck, label: "Plans to Review", value: pendingApprovals.length, color: "text-warning" },
+          { icon: Target, label: "Goals Pending", value: goalApprovals.length, color: "text-primary" },
+          { icon: Award, label: "Endorsements", value: competencyEndorsements.length, color: "text-accent" },
+          { icon: Star, label: "High Potentials", value: highPotentials.length, color: "text-success" },
+        ].map(stat => (
+          <Card key={stat.label} className="backdrop-blur-sm bg-card/80">
+            <CardContent className="p-4 flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-muted/50 flex items-center justify-center">
+                <stat.icon className={cn("h-5 w-5", stat.color)} />
+              </div>
+              <div>
+                <p className="text-lg font-bold text-foreground">{stat.value}</p>
+                <p className="text-[10px] text-muted-foreground">{stat.label}</p>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
+      <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-4">
+        <TabsList className="bg-muted/50 backdrop-blur-sm p-1 rounded-xl">
+          <TabsTrigger value="plans" className="rounded-lg gap-2 text-xs data-[state=active]:bg-card data-[state=active]:shadow-sm">
+            <ClipboardCheck className="h-3.5 w-3.5" /> Dev Plans
+            {pendingApprovals.length > 0 && (
+              <span className="ml-1 w-5 h-5 rounded-full bg-warning/20 text-warning text-[10px] flex items-center justify-center font-bold">
+                {pendingApprovals.length}
+              </span>
+            )}
+          </TabsTrigger>
+          <TabsTrigger value="goals" className="rounded-lg gap-2 text-xs data-[state=active]:bg-card data-[state=active]:shadow-sm">
+            <Target className="h-3.5 w-3.5" /> Goal Approvals
+          </TabsTrigger>
+          <TabsTrigger value="training" className="rounded-lg gap-2 text-xs data-[state=active]:bg-card data-[state=active]:shadow-sm">
+            <GraduationCap className="h-3.5 w-3.5" /> Team Training
+          </TabsTrigger>
+          <TabsTrigger value="endorsements" className="rounded-lg gap-2 text-xs data-[state=active]:bg-card data-[state=active]:shadow-sm">
+            <Award className="h-3.5 w-3.5" /> Endorsements
+          </TabsTrigger>
+          <TabsTrigger value="hipo" className="rounded-lg gap-2 text-xs data-[state=active]:bg-card data-[state=active]:shadow-sm">
+            <Star className="h-3.5 w-3.5" /> High Potentials
+          </TabsTrigger>
+        </TabsList>
+
+        {/* DEV PLANS REVIEW */}
+        <TabsContent value="plans" className="space-y-3">
+          {pendingApprovals.length === 0 ? (
+            <Card className="backdrop-blur-sm bg-card/80">
+              <CardContent className="p-8 text-center">
+                <CheckCircle2 className="h-8 w-8 text-success mx-auto mb-2" />
+                <p className="text-sm text-muted-foreground">All development plans have been reviewed!</p>
+              </CardContent>
+            </Card>
+          ) : (
+            pendingApprovals.map(plan => (
+              <Card key={plan.id} className="backdrop-blur-sm bg-card/80 border-warning/20">
+                <CardContent className="p-4">
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-xl bg-warning/10 flex items-center justify-center">
+                        <ClipboardCheck className="h-5 w-5 text-warning" />
+                      </div>
+                      <div>
+                        <p className="text-sm font-semibold text-foreground">{plan.employeeName}</p>
+                        <p className="text-[10px] text-muted-foreground">
+                          {plan.planCode} · Target: {plan.targetPosition} · {plan.itemCount} items · QAR {plan.estimatedCost.toLocaleString()}
+                        </p>
+                      </div>
+                    </div>
+                    <p className="text-[10px] text-muted-foreground">Submitted {plan.submittedAt}</p>
+                  </div>
+                  <div className="flex gap-2 justify-end">
+                    <Button variant="ghost" size="sm" className="h-8 text-xs gap-1.5">
+                      <Eye className="h-3 w-3" /> View Details
+                    </Button>
+                    <Button variant="outline" size="sm" className="h-8 text-xs gap-1.5 text-destructive border-destructive/30 hover:bg-destructive/10">
+                      <ThumbsDown className="h-3 w-3" /> Return
+                    </Button>
+                    <Button size="sm" className="h-8 text-xs gap-1.5">
+                      <ThumbsUp className="h-3 w-3" /> Approve
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            ))
+          )}
+        </TabsContent>
+
+        {/* GOAL APPROVALS */}
+        <TabsContent value="goals" className="space-y-3">
+          {goalApprovals.map(goal => (
+            <Card key={goal.id} className="backdrop-blur-sm bg-card/80">
+              <CardContent className="p-4 flex items-center gap-3">
+                <div className={cn(
+                  "w-8 h-8 rounded-lg flex items-center justify-center shrink-0",
+                  goal.type === "certification" ? "bg-accent/10" :
+                  goal.type === "learning" ? "bg-info/10" : "bg-primary/10"
+                )}>
+                  {goal.type === "certification" ? <Award className="h-3.5 w-3.5 text-accent" /> :
+                   goal.type === "learning" ? <GraduationCap className="h-3.5 w-3.5 text-info" /> :
+                   <Target className="h-3.5 w-3.5 text-primary" />}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-xs font-semibold text-foreground">{goal.goal}</p>
+                  <p className="text-[10px] text-muted-foreground">{goal.employee} · Submitted {goal.submitted}</p>
+                </div>
+                <div className="flex gap-1">
+                  <Button variant="ghost" size="sm" className="h-7 w-7 p-0 text-destructive hover:bg-destructive/10">
+                    <ThumbsDown className="h-3 w-3" />
+                  </Button>
+                  <Button variant="ghost" size="sm" className="h-7 w-7 p-0 text-success hover:bg-success/10">
+                    <ThumbsUp className="h-3 w-3" />
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </TabsContent>
+
+        {/* TEAM TRAINING TRACKER */}
+        <TabsContent value="training" className="space-y-3">
+          {teamTraining.map(member => (
+            <Card key={member.memberId} className="backdrop-blur-sm bg-card/80">
+              <CardContent className="p-4">
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary/80 to-accent/80 flex items-center justify-center shrink-0">
+                    <span className="text-xs font-bold text-primary-foreground">
+                      {member.name.split(" ").map(n => n[0]).join("")}
+                    </span>
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-semibold text-foreground">{member.name}</p>
+                    <p className="text-[10px] text-muted-foreground">
+                      {member.activeCourses} active · {member.completedThisQuarter} completed this quarter · {member.certsPending} cert{member.certsPending !== 1 ? "s" : ""} pending
+                    </p>
+                  </div>
+                  <div className="hidden md:block text-right">
+                    <p className="text-[9px] text-muted-foreground uppercase tracking-wider">YTD Spend</p>
+                    <p className="text-sm font-semibold text-foreground">QAR {member.spendYTD.toLocaleString()}</p>
+                  </div>
+                  <Button variant="ghost" size="sm" className="h-8 text-xs gap-1 text-primary shrink-0">
+                    Details <ChevronRight className="h-3 w-3" />
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+          <Card className="backdrop-blur-sm bg-card/80 border-muted">
+            <CardContent className="p-4 flex items-center justify-between">
+              <div>
+                <p className="text-xs font-semibold text-foreground">Team Training Budget</p>
+                <p className="text-[10px] text-muted-foreground">QAR {teamTraining.reduce((a, b) => a + b.spendYTD, 0).toLocaleString()} spent of QAR 25,000 allocated</p>
+              </div>
+              <div className="w-40">
+                <Progress value={(teamTraining.reduce((a, b) => a + b.spendYTD, 0) / 25000) * 100} className="h-2" />
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        {/* COMPETENCY ENDORSEMENTS */}
+        <TabsContent value="endorsements" className="space-y-3">
+          {competencyEndorsements.map(end => (
+            <Card key={end.id} className="backdrop-blur-sm bg-card/80 border-accent/20">
+              <CardContent className="p-4">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-3">
+                    <div className="w-9 h-9 rounded-lg bg-accent/10 flex items-center justify-center">
+                      <Award className="h-4 w-4 text-accent" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold text-foreground">{end.employee}</p>
+                      <p className="text-[10px] text-muted-foreground">
+                        {end.competency}: Level {end.currentLevel} → {end.requestedLevel}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <p className="text-xs text-muted-foreground mb-3 pl-12">Evidence: {end.evidence}</p>
+                <div className="flex gap-2 justify-end">
+                  <Button variant="outline" size="sm" className="h-8 text-xs gap-1.5 text-destructive border-destructive/30 hover:bg-destructive/10">
+                    <ThumbsDown className="h-3 w-3" /> Decline
+                  </Button>
+                  <Button size="sm" className="h-8 text-xs gap-1.5">
+                    <ThumbsUp className="h-3 w-3" /> Endorse
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </TabsContent>
+
+        {/* HIGH POTENTIALS */}
+        <TabsContent value="hipo" className="space-y-3">
+          <Card className="backdrop-blur-sm bg-card/80 border-primary/20 mb-4">
+            <CardContent className="p-4">
+              <div className="flex items-center gap-2 mb-2">
+                <Sparkles className="h-4 w-4 text-primary" />
+                <p className="text-sm font-semibold text-foreground">AI-Identified High Potentials</p>
+              </div>
+              <p className="text-xs text-muted-foreground">Team members showing exceptional growth velocity and readiness for advancement.</p>
+            </CardContent>
+          </Card>
+          {highPotentials.map(hp => {
+            const member = teamMembers.find(m => m.id === hp.id);
+            return (
+              <Card key={hp.id} className="backdrop-blur-sm bg-card/80 hover:shadow-md transition-shadow border-success/20">
+                <CardContent className="p-4">
+                  <div className="flex items-center gap-4 mb-3">
+                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-success/80 to-primary/80 flex items-center justify-center shrink-0">
+                      <Star className="h-5 w-5 text-primary-foreground" />
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2">
+                        <p className="text-sm font-semibold text-foreground">{hp.name}</p>
+                        <Badge className="text-[9px] h-5 bg-success/15 text-success">{hp.readiness}% ready</Badge>
+                      </div>
+                      <p className="text-[10px] text-muted-foreground">{member?.position} · {member?.grade}</p>
+                    </div>
+                  </div>
+                  <p className="text-xs text-muted-foreground mb-2">{hp.reason}</p>
+                  <div className="flex items-center justify-between">
+                    <Badge variant="outline" className="text-[9px] h-5 border-primary/30 text-primary">
+                      Recommendation: {hp.recommendation}
+                    </Badge>
+                    <Button variant="ghost" size="sm" className="h-7 text-xs text-primary">
+                      Take Action <ChevronRight className="h-3 w-3 ml-1" />
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            );
+          })}
+        </TabsContent>
+      </Tabs>
+    </div>
+  );
+};
+
+export default V2ManagerCataloguePage;
