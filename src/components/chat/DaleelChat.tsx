@@ -137,7 +137,7 @@ const getRoleResponses = (role: UserRole): Record<string, { content: string; act
         "Which programs have the highest completion rates?": {
           content: "Here are your top-performing programs:\n\n🏆 **Highest Completion:**\n1. Six Sigma Green Belt — **96%** (22/22 completed)\n2. Agile Leadership Workshop — **89%** (12/15)\n3. PMP Certification Cohort — **78%** (14/18)\n\n📉 **Lowest Completion:**\n1. Data Analytics Bootcamp — **42%** (needs review)\n2. Change Management Cert — **55%**\n\n**Insight:** Shorter, workshop-based programs show higher engagement. Consider breaking longer programs into modules.",
           actions: [
-            { label: "View All Programs", path: "/v2/ld" },
+            { label: "View All Programs", path: "/ld" },
           ],
         },
         "Recommend training for the upcoming quarter": {
