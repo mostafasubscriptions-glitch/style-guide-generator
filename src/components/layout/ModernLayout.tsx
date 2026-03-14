@@ -243,10 +243,10 @@ const ModernLayout = () => {
           </div>
         </div>
 
-        {/* Level 2: Navigation links */}
-        <div className="border-t border-border/30">
-          <div className="max-w-[1440px] mx-auto px-6">
-            <nav className="flex items-center gap-1 h-14">
+        {/* Level 2: Floating tab-bar navigation */}
+        <div className="relative">
+          <div className="max-w-[1440px] mx-auto px-6 py-3">
+            <div className="flex items-center gap-2 p-1.5 rounded-2xl bg-muted/40 backdrop-blur-sm border border-border/30">
               {filteredNav.map((item) => {
                 const isActive =
                   location.pathname === item.path ||
@@ -255,23 +255,30 @@ const ModernLayout = () => {
                   <motion.button
                     key={item.path}
                     onClick={() => navigate(item.path)}
-                    whileTap={{ scale: 0.97 }}
+                    whileTap={{ scale: 0.95 }}
                     className={cn(
-                      "relative flex items-center gap-2.5 px-6 h-10 rounded-xl text-[15px] font-medium transition-colors duration-200",
+                      "relative flex-1 flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-medium transition-colors duration-200 min-w-0",
                       isActive
-                        ? "text-primary-foreground"
-                        : "text-muted-foreground hover:text-foreground hover:bg-muted/40"
+                        ? "text-primary"
+                        : "text-muted-foreground hover:text-foreground"
                     )}
                   >
                     {isActive && (
                       <motion.div
-                        layoutId="nav-pill"
-                        className="absolute inset-0 bg-primary rounded-xl"
-                        transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
+                        layoutId="nav-tab"
+                        className="absolute inset-0 bg-card rounded-xl shadow-sm border border-border/50"
+                        transition={{ type: "spring", bounce: 0.2, duration: 0.45 }}
                       />
                     )}
-                    <item.icon className="h-[18px] w-[18px] relative z-10" />
-                    <span className="relative z-10">{item.label}</span>
+                    <item.icon className="h-4 w-4 relative z-10 shrink-0" />
+                    <span className="relative z-10 truncate">{item.label}</span>
+                    {isActive && (
+                      <motion.div
+                        layoutId="nav-dot"
+                        className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-primary z-10"
+                        transition={{ type: "spring", bounce: 0.3, duration: 0.5 }}
+                      />
+                    )}
                   </motion.button>
                 );
               })}
@@ -279,21 +286,21 @@ const ModernLayout = () => {
               {/* Admin Dropdown */}
               {(role === "ld" || role === "strategic_leader") && (
                 <>
-                  <div className="w-px h-6 bg-border/50 mx-1" />
+                  <div className="w-px h-8 bg-border/50" />
                   <div className="relative">
                     <motion.button
                       onClick={() => setAdminOpen(!adminOpen)}
-                      whileTap={{ scale: 0.97 }}
+                      whileTap={{ scale: 0.95 }}
                       className={cn(
-                        "flex items-center gap-2.5 px-6 h-10 rounded-xl text-[15px] font-medium transition-colors duration-200",
+                        "flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-sm font-medium transition-colors duration-200",
                         location.pathname.startsWith("/admin")
-                          ? "text-primary bg-primary/10"
-                          : "text-muted-foreground hover:text-foreground hover:bg-muted/40"
+                          ? "text-primary bg-card shadow-sm border border-border/50"
+                          : "text-muted-foreground hover:text-foreground"
                       )}
                     >
-                      <Settings className="h-[18px] w-[18px]" />
+                      <Settings className="h-4 w-4" />
                       Admin
-                      <ChevronDown className={cn("h-3.5 w-3.5 transition-transform", adminOpen && "rotate-180")} />
+                      <ChevronDown className={cn("h-3 w-3 transition-transform", adminOpen && "rotate-180")} />
                     </motion.button>
                     <AnimatePresence>
                       {adminOpen && (
@@ -302,7 +309,7 @@ const ModernLayout = () => {
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: 6 }}
                           transition={{ duration: 0.15 }}
-                          className="absolute top-full mt-2 left-0 w-52 bg-card border border-border/50 rounded-xl shadow-lg p-1.5 z-50"
+                          className="absolute top-full mt-2 right-0 w-52 bg-card border border-border/50 rounded-xl shadow-lg p-1.5 z-50"
                         >
                           {adminItems.map((item) => (
                             <button
@@ -320,7 +327,7 @@ const ModernLayout = () => {
                   </div>
                 </>
               )}
-            </nav>
+            </div>
           </div>
         </div>
       </header>
