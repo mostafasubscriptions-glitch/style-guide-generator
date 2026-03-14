@@ -7,6 +7,7 @@ import { useTheme } from "@/contexts/ThemeContext";
 import { cn } from "@/lib/utils";
 import { Shield, ChevronDown } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { UserRole } from "@/contexts/RoleContext";
 
@@ -35,6 +36,7 @@ const ClassicTopBar = ({ onToggleChat, chatOpen, onToggleNotifications, notifica
   const { role, setRole, roleName } = useRole();
   const { theme, toggleTheme } = useTheme();
   const [roleMenuOpen, setRoleMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <header className="h-14 border-b border-border bg-card flex items-center justify-between px-6 shrink-0">
@@ -72,7 +74,7 @@ const ClassicTopBar = ({ onToggleChat, chatOpen, onToggleNotifications, notifica
                 {(Object.keys(roleLabels) as UserRole[]).map((r) => (
                   <button
                     key={r}
-                    onClick={() => { setRole(r); setRoleMenuOpen(false); }}
+                    onClick={() => { setRole(r); setRoleMenuOpen(false); navigate("/"); }}
                     className={cn(
                       "w-full flex items-center gap-2 px-3 py-2 rounded-lg text-xs transition-colors",
                       role === r ? "bg-primary/10 text-primary font-medium" : "text-foreground hover:bg-muted/50"
@@ -116,46 +118,6 @@ const ClassicTopBar = ({ onToggleChat, chatOpen, onToggleNotifications, notifica
             </div>
             <span className="text-sm font-medium text-foreground hidden lg:block">Ahmed Al-Thani</span>
           </button>
-        </div>
-      </div>
-
-      {roleMenuOpen && (
-        <div className="fixed inset-0 z-40" onClick={() => setRoleMenuOpen(false)} />
-      )}
-    </header>
-                ))}
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-
-        {/* Theme Toggle */}
-        <Button variant="ghost" size="icon" onClick={toggleTheme}>
-          {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
-        </Button>
-
-        <Button
-          variant={chatOpen ? "default" : "outline"}
-          size="sm"
-          onClick={onToggleChat}
-          className="gap-2"
-        >
-          <MessageSquare className="h-4 w-4" />
-          Ask Daleel
-        </Button>
-
-        <Button variant="ghost" size="icon" className="relative" onClick={onToggleNotifications}>
-          <Bell className="h-4 w-4" />
-          <span className="absolute -top-0.5 -right-0.5 w-4 h-4 rounded-full bg-destructive text-destructive-foreground text-[10px] font-bold flex items-center justify-center">
-            2
-          </span>
-        </Button>
-
-        <div className="flex items-center gap-2 ml-2 pl-2 border-l border-border">
-          <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
-            <span className="text-xs font-semibold text-primary-foreground">AA</span>
-          </div>
-          <span className="text-sm font-medium text-foreground hidden lg:block">Ahmed Al-Thani</span>
         </div>
       </div>
 
