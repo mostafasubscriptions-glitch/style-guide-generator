@@ -93,8 +93,8 @@ const getRoleResponses = (role: UserRole): Record<string, { content: string; act
         "What career paths are available to me?": {
           content: "Based on your current role as **Senior Project Coordinator (G7)**, here are your possible paths:\n\n📈 **Vertical Growth:**\n- Project Manager (G8) — 1-2 years\n- Senior Project Manager (G9) — 3-4 years\n- Head of Projects (G10) — 5+ years\n\n↔️ **Lateral Move:**\n- Operations Manager (G8)\n- IT Project Lead (G8)\n\nYour strongest path is toward **Project Manager** given your current competencies. You'd need PMP + leadership development to be fully ready.",
           actions: [
-            { label: "View Career Paths", path: "/v2/catalogue" },
-            { label: "My Profile", path: "/v2/profile" },
+            { label: "View Career Paths", path: "/catalogue" },
+            { label: "My Profile", path: "/profile" },
           ],
         },
       };
