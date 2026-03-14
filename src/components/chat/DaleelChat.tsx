@@ -105,8 +105,8 @@ const getRoleResponses = (role: UserRole): Record<string, { content: string; act
         "How is my team progressing on their CDPs?": {
           content: "Here's your team's CDP status overview:\n\n✅ **Khalid Al-Mohannadi** — Approved, 72% readiness, 3 learning items\n⏳ **Sara Al-Sulaiti** — Pending Approval, 45% readiness\n📝 **Mohammed Al-Kuwari** — Draft, 58% readiness\n🔄 **Noura Al-Hajri** — In Progress, 81% readiness, 4 learning items\n\n**Key Insight:** Sara's CDP needs your approval, and Mohammed hasn't submitted his yet. Noura is your strongest performer.",
           actions: [
-            { label: "View My Team", path: "/v2/manager" },
-            { label: "Review Sara's CDP", path: "/v2/manager/team/3" },
+            { label: "View My Team", path: "/manager" },
+            { label: "Review Sara's CDP", path: "/manager/team/3" },
           ],
         },
         "Which team members need attention?": {
