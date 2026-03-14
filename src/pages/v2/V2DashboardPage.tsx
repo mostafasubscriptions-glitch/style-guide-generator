@@ -115,7 +115,7 @@ const V2DashboardPage = () => {
                   </div>
                 </div>
               </div>
-              <Button className="w-full gap-2 rounded-xl" onClick={() => navigate("/v2/wizard")}>
+              <Button className="w-full gap-2 rounded-xl" onClick={() => navigate("/wizard")}>
                 View Plan <ArrowRight className="h-4 w-4" />
               </Button>
             </CardContent>

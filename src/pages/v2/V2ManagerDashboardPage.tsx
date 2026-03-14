@@ -123,7 +123,7 @@ const V2ManagerDashboardPage = () => {
                       </div>
                     </div>
                   </div>
-                  <Button variant="ghost" size="sm" className="h-8 w-8 p-0 shrink-0" onClick={(e) => { e.stopPropagation(); navigate(`/v2/manager/team/${member.id}`); }}>
+                  <Button variant="ghost" size="sm" className="h-8 w-8 p-0 shrink-0" onClick={(e) => { e.stopPropagation(); navigate(`/manager/team/${member.id}`); }}>
                     <Eye className="h-4 w-4 text-muted-foreground" />
                   </Button>
                 </div>

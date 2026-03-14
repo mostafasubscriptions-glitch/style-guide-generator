@@ -137,7 +137,7 @@ const V2TeamMemberDetailPage = () => {
   return (
     <div className="p-6 animate-fade-in max-w-6xl mx-auto">
       {/* Back button */}
-      <Button variant="ghost" onClick={() => navigate("/v2/manager")} className="gap-2 mb-4 text-xs">
+      <Button variant="ghost" onClick={() => navigate("/manager")} className="gap-2 mb-4 text-xs">
         <ArrowLeft className="h-3.5 w-3.5" /> Back to Team
       </Button>
 

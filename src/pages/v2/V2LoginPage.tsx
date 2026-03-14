@@ -31,7 +31,7 @@ const V2LoginPage = () => {
   const handleMicrosoftLogin = () => {
     setIsSigningIn(true);
     setRole(selectedRole);
-    setTimeout(() => navigate("/v2"), 1200);
+    setTimeout(() => navigate("/"), 1200);
   };
 
   const selectedRoleData = roles.find(r => r.value === selectedRole)!;
