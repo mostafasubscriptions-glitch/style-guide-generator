@@ -85,9 +85,9 @@ const CardGridView = ({ items }: Props) => {
                     {isExpanded ? "Less" : "Details"}
                     {isExpanded ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />}
                   </button>
-                  {isV2 && (
+                  {(
                     <button
-                      onClick={() => navigate(`/v2/catalogue/${item.type === "Certification" ? "cert" : "course"}/${item.type === "Certification" ? item.id : item.id - 100}`)}
+                      onClick={() => navigate(`/catalogue/${item.type === "Certification" ? "cert" : "course"}/${item.type === "Certification" ? item.id : item.id - 100}`)}
                       className="text-xs text-primary flex items-center gap-1 hover:underline"
                     >
                       Full Page <ArrowRight className="h-3 w-3" />

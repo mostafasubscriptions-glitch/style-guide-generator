@@ -53,7 +53,7 @@ const KanbanView = ({ items }: Props) => {
                       item.type === "Certification" && "border-l-4 border-l-accent"
                     )}
                     onClick={() => {
-                      if (isV2) navigate(`/v2/catalogue/${item.type === "Certification" ? "cert" : "course"}/${item.type === "Certification" ? item.id : item.id - 100}`);
+                      navigate(`/catalogue/${item.type === "Certification" ? "cert" : "course"}/${item.type === "Certification" ? item.id : item.id - 100}`);
                     }}
                   >
                     <CardContent className="p-3">
