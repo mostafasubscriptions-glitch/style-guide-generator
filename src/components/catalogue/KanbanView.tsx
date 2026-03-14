@@ -88,7 +88,7 @@ const KanbanView = ({ items }: Props) => {
                         <Badge variant="outline" className="text-[9px] text-primary border-primary/30">{item.competencyName}</Badge>
                       </div>
 
-                      {isV2 && (
+                      {(
                         <div className="mt-2 pt-2 border-t border-border">
                           <button className="text-[10px] text-primary flex items-center gap-1 hover:underline">
                             View Details <ArrowRight className="h-2.5 w-2.5" />

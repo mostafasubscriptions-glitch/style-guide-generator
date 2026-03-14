@@ -14,8 +14,8 @@ type SortKey = "code" | "title" | "provider" | "level" | "cost" | "duration";
 
 const TableView = ({ items }: Props) => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const isV2 = location.pathname.startsWith("/v2");
+
+
   const [sortKey, setSortKey] = useState<SortKey>("code");
   const [sortAsc, setSortAsc] = useState(true);
 

@@ -54,7 +54,7 @@ const CompactListView = ({ items }: Props) => {
           <span className="text-xs text-muted-foreground hidden lg:block w-16 text-center">{item.duration}</span>
           <span className="text-sm font-semibold text-foreground w-24 text-right">QAR {item.cost.toLocaleString()}</span>
 
-          {isV2 && (
+          {(
             <ArrowRight className="h-4 w-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity shrink-0" />
           )}
         </div>

@@ -13,8 +13,8 @@ interface Props {
 
 const CardGridView = ({ items }: Props) => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const isV2 = location.pathname.startsWith("/v2");
+
+
   const [expandedId, setExpandedId] = useState<number | null>(null);
 
   const getProviderInfo = (name: string) => providers.find(p => p.name === name);
