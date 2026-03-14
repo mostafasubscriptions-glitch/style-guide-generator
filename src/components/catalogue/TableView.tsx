@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
 import { Table, TableHeader, TableBody, TableHead, TableRow, TableCell } from "@/components/ui/table";
 import { Award, BookOpen, Star, ArrowUpDown } from "lucide-react";

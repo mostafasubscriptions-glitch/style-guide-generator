@@ -1,4 +1,4 @@
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
 import { Award, BookOpen, Star, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
