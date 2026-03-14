@@ -25,8 +25,8 @@ const heroConfig: Record<UserRole, {
     statValue: `${activePlan.completionPercent}%`,
     statPercent: activePlan.completionPercent,
     actions: [
-      { label: "Start CDP Wizard", icon: Compass, path: "/v2/wizard", primary: true },
-      { label: "Browse Catalogue", icon: BookOpen, path: "/v2/catalogue" },
+      { label: "Start CDP Wizard", icon: Compass, path: "/wizard", primary: true },
+      { label: "Browse Catalogue", icon: BookOpen, path: "/catalogue" },
     ],
   },
   manager: {
