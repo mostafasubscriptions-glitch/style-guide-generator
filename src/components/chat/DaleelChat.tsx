@@ -143,8 +143,8 @@ const getRoleResponses = (role: UserRole): Record<string, { content: string; act
         "Recommend training for the upcoming quarter": {
           content: "Based on gap analysis and strategic priorities, here's my Q3 recommendation:\n\n**Must-Have:**\n1. 🎯 PMP Prep Program — Addresses #1 org gap (est. 25 seats)\n2. 🎯 Data Analytics Fundamentals — High demand, aligns with Digital Transformation priority\n\n**Should-Have:**\n3. Risk Management Workshop — 32 employees need this\n4. Leadership Development Series — For G7→G8 pipeline\n\n**Estimated Budget:** QAR 185,000\n**ROI Projection:** Closes 40% of critical gaps by Q4.",
           actions: [
-            { label: "Provision Training", path: "/v2/ld/provision" },
-            { label: "Budget Overview", path: "/v2/ld" },
+            { label: "Provision Training", path: "/ld/provision" },
+            { label: "Budget Overview", path: "/ld" },
           ],
         },
       };
