@@ -39,9 +39,9 @@ const getActions = (role: UserRole): ActionConfig[] => {
       ];
     case "ld":
       return [
-        { label: "L&D Dashboard", desc: "Organization-wide analytics", icon: BarChart3, path: "/v2/ld", gradient: "from-primary to-primary-dark" },
-        { label: "Provision Training", desc: "Schedule & assign programs", icon: BookOpen, path: "/v2/ld/provision", gradient: "from-info to-[hsl(213,93%,45%)]" },
-        { label: "Manage Catalogue", desc: "Curate certifications & courses", icon: Settings, path: "/v2/catalogue", gradient: "from-accent to-[hsl(43,86%,36%)]" },
+        { label: "L&D Dashboard", desc: "Organization-wide analytics", icon: BarChart3, path: "/ld", gradient: "from-primary to-primary-dark" },
+        { label: "Provision Training", desc: "Schedule & assign programs", icon: BookOpen, path: "/ld/provision", gradient: "from-info to-[hsl(213,93%,45%)]" },
+        { label: "Manage Catalogue", desc: "Curate certifications & courses", icon: Settings, path: "/catalogue", gradient: "from-accent to-[hsl(43,86%,36%)]" },
         { label: "Ask Daleel", desc: "AI-powered L&D insights", icon: MessageSquare, path: "#", gradient: "from-success to-[hsl(152,61%,27%)]" },
       ];
     case "strategic_leader":
