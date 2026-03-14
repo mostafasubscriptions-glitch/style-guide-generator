@@ -244,36 +244,40 @@ const ModernLayout = () => {
         </div>
 
         {/* Level 2: Navigation links */}
-        <div className="border-t border-border/30">
+        <div className="border-t border-border/30 bg-muted/20">
           <div className="max-w-[1440px] mx-auto px-6">
-            <nav className="flex items-center gap-1 h-11 -mb-px">
+            <nav className="flex items-center gap-2 h-12">
               {filteredNav.map((item) => {
                 const isActive =
                   location.pathname === item.path ||
                   (item.path !== "/" && location.pathname.startsWith(item.path));
                 return (
-                  <button
+                  <motion.button
                     key={item.path}
                     onClick={() => navigate(item.path)}
+                    whileHover={{ y: -1 }}
+                    whileTap={{ scale: 0.97 }}
                     className={cn(
-                      "relative flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200",
+                      "relative flex items-center gap-2.5 px-5 py-2 rounded-xl text-sm font-medium transition-all duration-200",
                       isActive
-                        ? "text-primary"
-                        : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                        ? "text-primary-foreground"
+                        : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
                     )}
                   >
-                    <item.icon className="h-4 w-4" />
-                    <span>{item.label}</span>
                     {isActive && (
                       <motion.div
                         layoutId="nav-pill"
-                        className="absolute inset-0 bg-primary/10 rounded-lg"
-                        transition={{ type: "spring", bounce: 0.2, duration: 0.4 }}
+                        className="absolute inset-0 bg-gradient-to-r from-primary to-primary-dark rounded-xl shadow-md shadow-primary/20"
+                        transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
                       />
                     )}
-                  </button>
+                    <item.icon className={cn("h-4 w-4 relative z-10", isActive && "text-primary-foreground")} />
+                    <span className="relative z-10">{item.label}</span>
+                  </motion.button>
                 );
               })}
+
+
 
               {/* Admin Dropdown */}
               {(role === "ld" || role === "strategic_leader") && (
@@ -281,10 +285,10 @@ const ModernLayout = () => {
                   <button
                     onClick={() => setAdminOpen(!adminOpen)}
                     className={cn(
-                      "flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all",
+                      "flex items-center gap-2.5 px-5 py-2 rounded-xl text-sm font-medium transition-all",
                       location.pathname.startsWith("/admin")
                         ? "text-primary"
-                        : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                        : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
                     )}
                   >
                     <Settings className="h-4 w-4" />
