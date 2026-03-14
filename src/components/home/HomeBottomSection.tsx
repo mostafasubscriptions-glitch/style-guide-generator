@@ -90,7 +90,7 @@ const EmployeeBottom = () => {
               </div>
             ))}
           </div>
-          <Button variant="ghost" className="w-full mt-4 text-primary rounded-xl gap-2" onClick={() => navigate("/v2/dashboard")}>
+          <Button variant="ghost" className="w-full mt-4 text-primary rounded-xl gap-2" onClick={() => navigate("/dashboard")}>
             View all items <ArrowRight className="h-4 w-4" />
           </Button>
         </CardContent>
