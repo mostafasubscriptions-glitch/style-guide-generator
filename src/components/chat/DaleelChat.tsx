@@ -79,8 +79,8 @@ const getRoleResponses = (role: UserRole): Record<string, { content: string; act
         "What certifications should I pursue?": {
           content: "Based on your profile, I strongly recommend:\n\n**1. PMP (Project Management Professional)** — Your top priority. You have a critical gap in Project Management (Level 3 → 5), and PMP is the industry gold standard.\n\n**2. RMP (Risk Management Professional)** — Addresses your risk management gap (Level 2 → 4).\n\nBoth are **Qatar Recommended** and highly valued in the transport sector.\n\nWould you like me to help you plan a study schedule?",
           actions: [
-            { label: "Browse Certifications", path: "/v2/catalogue" },
-            { label: "Start CDP Wizard", path: "/v2/wizard" },
+            { label: "Browse Certifications", path: "/catalogue" },
+            { label: "Start CDP Wizard", path: "/wizard" },
           ],
         },
         "Help me understand my competency gaps": {
