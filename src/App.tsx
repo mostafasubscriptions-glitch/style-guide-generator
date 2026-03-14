@@ -69,6 +69,10 @@ const App = () => (
                 <Route path="/v2/ld" element={<V2LDDashboardPage />} />
                 <Route path="/v2/ld/provision" element={<V2LDProvisionPage />} />
                 <Route path="/v2/strategic" element={<V2StrategicDashboardPage />} />
+                <Route path="/v2/catalogue/employee" element={<V2EmployeeCataloguePage />} />
+                <Route path="/v2/catalogue/manager" element={<V2ManagerCataloguePage />} />
+                <Route path="/v2/catalogue/ld" element={<V2LDCataloguePage />} />
+                <Route path="/v2/catalogue/leader" element={<V2LeaderCataloguePage />} />
               </Route>
               <Route path="/style-guide" element={<StyleGuidePage />} />
               <Route path="*" element={<NotFound />} />
