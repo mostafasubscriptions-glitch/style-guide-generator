@@ -155,7 +155,7 @@ const getRoleResponses = (role: UserRole): Record<string, { content: string; act
         "How aligned is our workforce with Vision 2030?": {
           content: "Overall workforce alignment with **Qatar National Vision 2030** priorities:\n\n📊 **Alignment Score: 68%**\n\n**By Pillar:**\n- 🟢 Human Development: **78%** — Strong L&D programs\n- 🟡 Economic Development: **65%** — Need more business/finance skills\n- 🟡 Social Development: **62%** — Leadership pipeline gaps\n- 🔴 Environmental Development: **52%** — Sustainability skills lacking\n\n**Key Action:** Invest in sustainability and environmental management certifications to improve the weakest pillar.",
           actions: [
-            { label: "Strategic Dashboard", path: "/v2/strategic" },
+            { label: "Strategic Dashboard", path: "/strategic" },
           ],
         },
         "Show me department readiness overview": {
