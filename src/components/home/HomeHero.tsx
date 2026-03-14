@@ -36,8 +36,8 @@ const heroConfig: Record<UserRole, {
     statValue: "72%",
     statPercent: 72,
     actions: [
-      { label: "Review Team", icon: Users, path: "/v2/manager", primary: true },
-      { label: "Pending Approvals", icon: BarChart3, path: "/v2/manager" },
+      { label: "Review Team", icon: Users, path: "/manager", primary: true },
+      { label: "Pending Approvals", icon: BarChart3, path: "/manager" },
     ],
   },
   ld: {
