@@ -110,6 +110,48 @@ const ClassicTopBar = ({ onToggleChat, chatOpen, onToggleNotifications, notifica
         </Button>
 
         <div className="flex items-center gap-2 ml-2 pl-2 border-l border-border">
+          <button onClick={() => navigate("/profile")} className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+            <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
+              <span className="text-xs font-semibold text-primary-foreground">AA</span>
+            </div>
+            <span className="text-sm font-medium text-foreground hidden lg:block">Ahmed Al-Thani</span>
+          </button>
+        </div>
+      </div>
+
+      {roleMenuOpen && (
+        <div className="fixed inset-0 z-40" onClick={() => setRoleMenuOpen(false)} />
+      )}
+    </header>
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+
+        {/* Theme Toggle */}
+        <Button variant="ghost" size="icon" onClick={toggleTheme}>
+          {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+        </Button>
+
+        <Button
+          variant={chatOpen ? "default" : "outline"}
+          size="sm"
+          onClick={onToggleChat}
+          className="gap-2"
+        >
+          <MessageSquare className="h-4 w-4" />
+          Ask Daleel
+        </Button>
+
+        <Button variant="ghost" size="icon" className="relative" onClick={onToggleNotifications}>
+          <Bell className="h-4 w-4" />
+          <span className="absolute -top-0.5 -right-0.5 w-4 h-4 rounded-full bg-destructive text-destructive-foreground text-[10px] font-bold flex items-center justify-center">
+            2
+          </span>
+        </Button>
+
+        <div className="flex items-center gap-2 ml-2 pl-2 border-l border-border">
           <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
             <span className="text-xs font-semibold text-primary-foreground">AA</span>
           </div>

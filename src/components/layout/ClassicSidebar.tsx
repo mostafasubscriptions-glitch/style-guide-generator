@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import {
   Home, LayoutDashboard, Compass, BookOpen, HelpCircle,
   Award, GraduationCap, Users, PanelLeftClose, PanelLeft,
-  BarChart3, Landmark, Settings, Layers
+  BarChart3, Landmark, Settings, Layers, LogOut
 } from "lucide-react";
 import { useRole } from "@/contexts/RoleContext";
 import { useTheme } from "@/contexts/ThemeContext";
