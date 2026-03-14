@@ -276,12 +276,8 @@ const ModernLayout = () => {
                   </motion.button>
                 );
               })}
-                        transition={{ type: "spring", bounce: 0.2, duration: 0.4 }}
-                      />
-                    )}
-                  </button>
-                );
-              })}
+
+
 
               {/* Admin Dropdown */}
               {(role === "ld" || role === "strategic_leader") && (
