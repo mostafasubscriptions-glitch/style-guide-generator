@@ -285,10 +285,10 @@ const ModernLayout = () => {
                   <button
                     onClick={() => setAdminOpen(!adminOpen)}
                     className={cn(
-                      "flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all",
+                      "flex items-center gap-2.5 px-5 py-2 rounded-xl text-sm font-medium transition-all",
                       location.pathname.startsWith("/admin")
                         ? "text-primary"
-                        : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                        : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
                     )}
                   >
                     <Settings className="h-4 w-4" />
