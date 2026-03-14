@@ -58,8 +58,8 @@ const heroConfig: Record<UserRole, {
     statValue: "68%",
     statPercent: 68,
     actions: [
-      { label: "Strategic Dashboard", icon: Building2, path: "/v2/strategic", primary: true },
-      { label: "Org Analytics", icon: BarChart3, path: "/v2/strategic" },
+      { label: "Strategic Dashboard", icon: Building2, path: "/strategic", primary: true },
+      { label: "Org Analytics", icon: BarChart3, path: "/strategic" },
     ],
   },
 };

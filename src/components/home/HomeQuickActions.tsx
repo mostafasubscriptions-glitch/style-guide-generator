@@ -46,9 +46,9 @@ const getActions = (role: UserRole): ActionConfig[] => {
       ];
     case "strategic_leader":
       return [
-        { label: "Strategic Dashboard", desc: "Workforce alignment overview", icon: Building2, path: "/v2/strategic", gradient: "from-primary to-primary-dark" },
-        { label: "Org Analytics", desc: "Cross-department insights", icon: BarChart3, path: "/v2/strategic", gradient: "from-info to-[hsl(213,93%,45%)]" },
-        { label: "Talent Pipeline", desc: "Succession & readiness", icon: Users, path: "/v2/strategic", gradient: "from-accent to-[hsl(43,86%,36%)]" },
+        { label: "Strategic Dashboard", desc: "Workforce alignment overview", icon: Building2, path: "/strategic", gradient: "from-primary to-primary-dark" },
+        { label: "Org Analytics", desc: "Cross-department insights", icon: BarChart3, path: "/strategic", gradient: "from-info to-[hsl(213,93%,45%)]" },
+        { label: "Talent Pipeline", desc: "Succession & readiness", icon: Users, path: "/strategic", gradient: "from-accent to-[hsl(43,86%,36%)]" },
         { label: "Ask Daleel", desc: "AI strategic advisor", icon: MessageSquare, path: "#", gradient: "from-success to-[hsl(152,61%,27%)]" },
       ];
   }
