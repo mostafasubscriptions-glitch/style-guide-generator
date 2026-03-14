@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   Home, LayoutDashboard, Compass, BookOpen, HelpCircle,
   Users, Award, GraduationCap, MessageSquare, Bell, Search,
-  ChevronDown, User, Settings, LogOut, BarChart3, Shield, Landmark, Moon, Sun, Layers
+  ChevronDown, User, Settings, LogOut, BarChart3, Shield, Landmark, Moon, Sun
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import DaleelChat from "@/components/chat/DaleelChat";
@@ -70,10 +70,11 @@ const ModernLayout = () => {
 
       <OnboardingTour />
 
-      {/* Top Navigation */}
+      {/* Top Navigation — Two Levels */}
       <header className="sticky top-0 z-40 backdrop-blur-xl bg-card/70 border-b border-border/50">
+        {/* Level 1: Brand + Utility bar */}
         <div className="max-w-[1440px] mx-auto px-6">
-          <div className="flex items-center h-16 gap-8">
+          <div className="flex items-center h-14 gap-6">
             {/* Logo */}
             <div className="flex items-center gap-3 cursor-pointer shrink-0" onClick={() => navigate("/")}>
               <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center shadow-lg shadow-primary/25">
@@ -85,75 +86,19 @@ const ModernLayout = () => {
               </div>
             </div>
 
-            {/* Nav Links */}
-            <nav className="flex items-center gap-1 flex-1">
-              {filteredNav.map((item) => {
-                const isActive =
-                  location.pathname === item.path ||
-                  (item.path !== "/" && location.pathname.startsWith(item.path));
-                return (
-                  <button
-                    key={item.path}
-                    onClick={() => navigate(item.path)}
-                    className={cn(
-                      "relative flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200",
-                      isActive
-                        ? "text-primary"
-                        : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
-                    )}
-                  >
-                    <item.icon className="h-4 w-4" />
-                    <span>{item.label}</span>
-                    {isActive && (
-                      <motion.div
-                        layoutId="nav-pill"
-                        className="absolute inset-0 bg-primary/10 rounded-xl"
-                        transition={{ type: "spring", bounce: 0.2, duration: 0.4 }}
-                      />
-                    )}
-                  </button>
-                );
-              })}
+            {/* Search — expands in center */}
+            <div className="flex-1 flex justify-center">
+              <div className="relative w-full max-w-md">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <input
+                  placeholder="Search catalogue, certifications, courses..."
+                  className="w-full h-9 pl-9 pr-3 rounded-xl bg-muted/50 border-0 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all"
+                />
+              </div>
+            </div>
 
-              {/* Admin Dropdown */}
-              {(role === "ld" || role === "strategic_leader") && (
-                <div className="relative">
-                  <button
-                    onClick={() => setAdminOpen(!adminOpen)}
-                    className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all"
-                  >
-                    <Settings className="h-4 w-4" />
-                    Admin
-                    <ChevronDown className={cn("h-3 w-3 transition-transform", adminOpen && "rotate-180")} />
-                  </button>
-                  <AnimatePresence>
-                    {adminOpen && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 8, scale: 0.96 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: 8, scale: 0.96 }}
-                        transition={{ duration: 0.15 }}
-                        className="absolute top-full mt-2 left-0 w-56 backdrop-blur-xl bg-card/90 border border-border/50 rounded-2xl shadow-xl shadow-black/10 p-2 z-50"
-                      >
-                        {adminItems.map((item) => (
-                          <button
-                            key={item.path}
-                            onClick={() => { navigate(item.path); setAdminOpen(false); }}
-                            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-foreground hover:bg-muted/50 transition-colors"
-                          >
-                            <item.icon className="h-4 w-4 text-muted-foreground" />
-                            {item.label}
-                          </button>
-                        ))}
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-              )}
-            </nav>
-
-            {/* Right Side */}
-            <div className="flex items-center gap-2">
+            {/* Right utilities */}
+            <div className="flex items-center gap-1.5 shrink-0">
               {/* Role Switcher */}
               <div className="relative">
                 <button
@@ -194,19 +139,14 @@ const ModernLayout = () => {
                 </AnimatePresence>
               </div>
 
-              {/* Search */}
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                <input
-                  placeholder="Search..."
-                  className="w-48 h-9 pl-9 pr-3 rounded-xl bg-muted/50 border-0 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all focus:w-64"
-                />
-              </div>
+              {/* Divider */}
+              <div className="w-px h-5 bg-border/50 mx-1" />
 
               {/* Theme Toggle */}
               <button
                 onClick={toggleTheme}
-                className="w-9 h-9 rounded-xl flex items-center justify-center text-muted-foreground hover:bg-muted/50 transition-colors"
+                className="w-8 h-8 rounded-lg flex items-center justify-center text-muted-foreground hover:bg-muted/50 transition-colors"
+                title={theme === "dark" ? "Light mode" : "Dark mode"}
               >
                 {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
               </button>
@@ -214,23 +154,26 @@ const ModernLayout = () => {
               {/* Layout Toggle */}
               <button
                 onClick={() => setLayoutTheme("classic")}
-                className="w-9 h-9 rounded-xl flex items-center justify-center text-muted-foreground hover:bg-muted/50 transition-colors group"
+                className="w-8 h-8 rounded-lg flex items-center justify-center text-muted-foreground hover:bg-muted/50 transition-colors group"
                 title="Switch to Sidebar Navigation"
               >
                 <LayoutDashboard className="h-4 w-4 group-hover:text-primary transition-colors" />
               </button>
 
+              {/* Divider */}
+              <div className="w-px h-5 bg-border/50 mx-1" />
+
               {/* Daleel */}
               <button
                 onClick={() => setChatOpen(!chatOpen)}
                 className={cn(
-                  "flex items-center gap-2 h-9 px-4 rounded-xl text-sm font-medium transition-all",
+                  "flex items-center gap-2 h-8 px-3 rounded-lg text-xs font-medium transition-all",
                   chatOpen
                     ? "bg-primary text-primary-foreground shadow-lg shadow-primary/25"
                     : "bg-gradient-to-r from-primary/10 to-accent/10 text-primary hover:from-primary/20 hover:to-accent/20"
                 )}
               >
-                <MessageSquare className="h-4 w-4" />
+                <MessageSquare className="h-3.5 w-3.5" />
                 Daleel
               </button>
 
@@ -238,19 +181,19 @@ const ModernLayout = () => {
               <button
                 onClick={() => setNotificationsOpen(!notificationsOpen)}
                 className={cn(
-                  "relative w-9 h-9 rounded-xl flex items-center justify-center transition-colors",
+                  "relative w-8 h-8 rounded-lg flex items-center justify-center transition-colors",
                   notificationsOpen ? "bg-primary/10 text-primary" : "text-muted-foreground hover:bg-muted/50"
                 )}
               >
                 <Bell className="h-4 w-4" />
-                <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-destructive rounded-full" />
+                <span className="absolute top-1 right-1 w-2 h-2 bg-destructive rounded-full" />
               </button>
 
               {/* Profile */}
               <div className="relative">
                 <button
                   onClick={() => setProfileOpen(!profileOpen)}
-                  className="flex items-center gap-2 h-9 px-2 rounded-xl hover:bg-muted/50 transition-colors"
+                  className="flex items-center gap-2 h-8 px-1.5 rounded-lg hover:bg-muted/50 transition-colors"
                 >
                   <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center">
                     <span className="text-[10px] font-bold text-primary-foreground">AA</span>
@@ -297,6 +240,82 @@ const ModernLayout = () => {
                 </AnimatePresence>
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* Level 2: Navigation links */}
+        <div className="border-t border-border/30">
+          <div className="max-w-[1440px] mx-auto px-6">
+            <nav className="flex items-center gap-1 h-11 -mb-px">
+              {filteredNav.map((item) => {
+                const isActive =
+                  location.pathname === item.path ||
+                  (item.path !== "/" && location.pathname.startsWith(item.path));
+                return (
+                  <button
+                    key={item.path}
+                    onClick={() => navigate(item.path)}
+                    className={cn(
+                      "relative flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200",
+                      isActive
+                        ? "text-primary"
+                        : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                    )}
+                  >
+                    <item.icon className="h-4 w-4" />
+                    <span>{item.label}</span>
+                    {isActive && (
+                      <motion.div
+                        layoutId="nav-pill"
+                        className="absolute inset-0 bg-primary/10 rounded-lg"
+                        transition={{ type: "spring", bounce: 0.2, duration: 0.4 }}
+                      />
+                    )}
+                  </button>
+                );
+              })}
+
+              {/* Admin Dropdown */}
+              {(role === "ld" || role === "strategic_leader") && (
+                <div className="relative">
+                  <button
+                    onClick={() => setAdminOpen(!adminOpen)}
+                    className={cn(
+                      "flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all",
+                      location.pathname.startsWith("/admin")
+                        ? "text-primary"
+                        : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                    )}
+                  >
+                    <Settings className="h-4 w-4" />
+                    Admin
+                    <ChevronDown className={cn("h-3 w-3 transition-transform", adminOpen && "rotate-180")} />
+                  </button>
+                  <AnimatePresence>
+                    {adminOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 8, scale: 0.96 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 8, scale: 0.96 }}
+                        transition={{ duration: 0.15 }}
+                        className="absolute top-full mt-2 left-0 w-56 backdrop-blur-xl bg-card/90 border border-border/50 rounded-2xl shadow-xl shadow-black/10 p-2 z-50"
+                      >
+                        {adminItems.map((item) => (
+                          <button
+                            key={item.path}
+                            onClick={() => { navigate(item.path); setAdminOpen(false); }}
+                            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-foreground hover:bg-muted/50 transition-colors"
+                          >
+                            <item.icon className="h-4 w-4 text-muted-foreground" />
+                            {item.label}
+                          </button>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              )}
+            </nav>
           </div>
         </div>
       </header>
