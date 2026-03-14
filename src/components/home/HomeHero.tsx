@@ -47,8 +47,8 @@ const heroConfig: Record<UserRole, {
     statValue: "84%",
     statPercent: 84,
     actions: [
-      { label: "L&D Dashboard", icon: BarChart3, path: "/v2/ld", primary: true },
-      { label: "Provision Training", icon: BookOpen, path: "/v2/ld/provision" },
+      { label: "L&D Dashboard", icon: BarChart3, path: "/ld", primary: true },
+      { label: "Provision Training", icon: BookOpen, path: "/ld/provision" },
     ],
   },
   strategic_leader: {
